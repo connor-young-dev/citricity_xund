@@ -12,24 +12,6 @@ if ($ADMIN->fulltree) {
                                                                                                                                     
     // Each page is a tab - the first is the "General" tab.                                                                         
     $page = new admin_settingpage('theme_citricityxund_general', get_string('generalsettings', 'theme_citricityxund'));                                                                                                                                 
-
-    // Variable $brand-color.                                                                                                       
-    // We use an empty default value because the default colour should come from the preset.                                        
-    $name = 'theme_citricityxund/brandcolor';                                                                                               
-    $title = get_string('brandcolor', 'theme_citricityxund');                                                                               
-    $description = get_string('brandcolor_desc', 'theme_citricityxund');                                                                    
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');                                               
-    $setting->set_updatedcallback('theme_reset_all_caches');                                                                        
-    $page->add($setting);
-    
-    // Login page background setting.                                                                                               
-    // We use variables for readability.                                                                                            
-    $name = 'theme_citricityxund/loginbackgroundimage';                                                                                     
-    $title = get_string('loginbackgroundimage', 'theme_citricityxund');                                                                     
-    $description = get_string('loginbackgroundimage_desc', 'theme_citricityxund');                                                                                                                                                      
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'loginbackgroundimage');                                                                
-    $setting->set_updatedcallback('theme_citricityxund_update_settings_images');                                                                                                                             
-    $page->add($setting);
                                                                                                                                     
     // Must add the page after definiting all the settings!                                                                         
     $settings->add($page);                                                                                                          

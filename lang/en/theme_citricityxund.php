@@ -4,21 +4,13 @@
 defined('MOODLE_INTERNAL') || die();                                                                                                
                                                                                                                                     
 // The name of the second tab in the theme settings.                                                                                
-$string['advancedsettings'] = 'Advanced settings';                                                                                  
-// The brand colour setting.                                                                                                        
-$string['brandcolor'] = 'Brand colour';                                                                                             
-// The brand colour setting description.                                                                                            
-$string['brandcolor_desc'] = 'The accent colour.';     
+$string['advancedsettings'] = 'Advanced settings';                                                                                     
 // A description shown in the admin theme selector.                                                                                 
 $string['choosereadme'] = 'Theme Citricity XUND is a child theme of Boost. It brands Boost to Citricity XUND branding.';               
 // Name of the settings pages.                                                                                                      
 $string['configtitle'] = 'Citiricity XUND settings';                                                                                          
 // Name of the first settings tab.                                                                                                  
-$string['generalsettings'] = 'General settings';
-// Background image for login page.                                                                                                 
-$string['loginbackgroundimage'] = 'Login page background image';                                                                    
-// Background image for login page.                                                                                                 
-$string['loginbackgroundimage_desc'] = 'An image that will be stretched to fill the background of the login page.';                                                                                    
+$string['generalsettings'] = 'General settings';                                                                                 
 // The name of our plugin.                                                                                                          
 $string['pluginname'] = 'Citricity XUND';                                                                                                  
 // Preset files setting.                                                                                                            
