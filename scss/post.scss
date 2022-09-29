@@ -1,1 +1,7 @@
 // Post SCSS for the theme.
+
+// Set login page background image.
+body.pagelayout-login {                                                                                                             
+    background-image: url([[pix:theme_citricityxund|loginbackgroundimage]]);                                                                
+    background-size: cover;                                                                                                         
+}

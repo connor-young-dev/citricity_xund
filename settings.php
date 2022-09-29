@@ -20,7 +20,16 @@ if ($ADMIN->fulltree) {
     $description = get_string('brandcolor_desc', 'theme_citricityxund');                                                                    
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '');                                               
     $setting->set_updatedcallback('theme_reset_all_caches');                                                                        
-    $page->add($setting);                                                                                                           
+    $page->add($setting);
+    
+    // Login page background setting.                                                                                               
+    // We use variables for readability.                                                                                            
+    $name = 'theme_citricityxund/loginbackgroundimage';                                                                                     
+    $title = get_string('loginbackgroundimage', 'theme_citricityxund');                                                                     
+    $description = get_string('loginbackgroundimage_desc', 'theme_citricityxund');                                                                                                                                                      
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'loginbackgroundimage');                                                                
+    $setting->set_updatedcallback('theme_citricityxund_update_settings_images');                                                                                                                             
+    $page->add($setting);
                                                                                                                                     
     // Must add the page after definiting all the settings!                                                                         
     $settings->add($page);                                                                                                          

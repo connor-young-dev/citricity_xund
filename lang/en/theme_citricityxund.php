@@ -14,7 +14,11 @@ $string['choosereadme'] = 'Theme Citricity XUND is a child theme of Boost. It br
 // Name of the settings pages.                                                                                                      
 $string['configtitle'] = 'Citiricity XUND settings';                                                                                          
 // Name of the first settings tab.                                                                                                  
-$string['generalsettings'] = 'General settings';                                                                                    
+$string['generalsettings'] = 'General settings';
+// Background image for login page.                                                                                                 
+$string['loginbackgroundimage'] = 'Login page background image';                                                                    
+// Background image for login page.                                                                                                 
+$string['loginbackgroundimage_desc'] = 'An image that will be stretched to fill the background of the login page.';                                                                                    
 // The name of our plugin.                                                                                                          
 $string['pluginname'] = 'Citricity XUND';                                                                                                  
 // Preset files setting.                                                                                                            
