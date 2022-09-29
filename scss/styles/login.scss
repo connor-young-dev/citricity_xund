@@ -1,0 +1,29 @@
+.pagelayout-login {
+    .login-card {
+        border: 0;
+        background-color: rgba(255, 255, 255, .9);
+        border: unset;
+        box-shadow: 0 0 11.5px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-outline-secondary {
+        @include button-outline-variant($gray-600);
+        border-color: $gray-600;
+    }
+
+    .btn-outline-secondary {
+        background-color: $white;
+    }
+
+    #region-main {
+        position: static;
+    }
+}
+
+.login-logo { 
+    position: absolute;
+    top: 2rem;
+    img {
+        height: 40px;
+    }
+}
