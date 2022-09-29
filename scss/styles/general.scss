@@ -25,3 +25,8 @@ body {
 }
 
 @include bg-variant(".bg-gray", $gray-200, true);
+
+// Stop radius defaulting to zero.
+.btn { 
+    border-radius: $btn-border-radius;
+}
