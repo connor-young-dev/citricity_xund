@@ -9,8 +9,14 @@
 
     <div id="page" class="container-fluid mt-0">
         <div id="page-content" class="row">
-            <div id="region-main-box" class="col-12">
+            <div id="region-main-box" class="col-12 d-flex align-items-center">
                 <section id="region-main" class="col-12" aria-label="{{#str}}content{{/str}}">
+                    {{#logourl}}
+                        <div class="login-logo">
+                            <span class="sr-only">{{sitename}}: {{#str}} login {{/str}}</span>
+                            <img src="{{logourl}}" class="img-fluid" alt=""/>
+                        </div>
+                    {{/logourl}}
                     {{{ output.course_content_header }}}
                     {{{ output.main_content }}}
                     {{{ output.course_content_footer }}}
