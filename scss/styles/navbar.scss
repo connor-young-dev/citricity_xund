@@ -1,3 +1,50 @@
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
 }
+
+.navbar.fixed-top {
+    height: $navbar-height;
+    .navbar-brand {
+        height: $navbar-height - 5px;
+
+        .logo {
+            max-height: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
+        }
+    }
+
+    .nav-link {
+        font-weight: bold;
+    }
+
+    .nav-drawer-button {
+        .icon {
+            font-size: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
+            width: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
+            height: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
+        }
+    }
+}
+
+.navbar-expand .usernav { 
+    .nav-link {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+
+        .icon {
+            color: #757575;
+
+            &:hover {
+                color: darken(#757575, 15%);
+            }
+        }
+    }
+
+    .usermenu .dropdown-toggle {
+        color: #65c1be;
+        font-weight: bold;
+
+        &:hover {
+            color: darken(#65c1be, 15%);
+        }
+    }
+}
