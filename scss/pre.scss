@@ -30,6 +30,7 @@ $info:          $cyan !default;
 $warning:       $orange !default;
 $danger:        $red !default;
 $secondary:     #eb4f5a !default;
+$turkis:        #65C1BE !default;
 
 $info-outline:    #1f7e9a;
 $warning-outline: #a6670e;
@@ -104,6 +105,7 @@ $theme-colors: map-merge((
     info: $info,
     warning: $warning,
     danger: $danger,
+    turkis: $turkis
 ), $theme-colors);
 // stylelint-enable
 

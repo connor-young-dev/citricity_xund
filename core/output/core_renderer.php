@@ -2,7 +2,6 @@
 
 namespace theme_citricityxund\output;
 
-use theme_config;
 use context_course;
 use core_auth\output\login;
 
