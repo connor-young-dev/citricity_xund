@@ -5,3 +5,13 @@ body.pagelayout-login {
     background-image: url([[pix:theme_citricityxund|loginbg]]);                                                                
     background-size: cover;                                                                                                         
 }
+
+// Set footer background image.
+#page-footer {            
+    @include media-breakpoint-up(lg) {                                                                                                 
+        background-image: url([[pix:theme_citricityxund|footerbg]]);                                                                
+        background-size: contain;
+        background-repeat: no-repeat; 
+        background-position: right;  
+    }                                                                                                   
+}

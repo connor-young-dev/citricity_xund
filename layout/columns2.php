@@ -29,7 +29,8 @@ $templatecontext = [
     'navdraweropen' => $navdraweropen,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'logo' => $OUTPUT->image_url('logo', 'theme_citricityxund')
+    'logo' => $OUTPUT->image_url('logo', 'theme_citricityxund'),
+    'moodlelogo' => $OUTPUT->image_url('moodlelogo', 'theme_citricityxund'),
 ];
 
 $nav = $PAGE->flatnav;
