@@ -1,0 +1,43 @@
+<nav class="list-group" aria-label="{{firstcollectionlabel}}">
+    <ul>
+        <li>
+            <a class="list-group-item list-heading-logo" href="{{{ config.wwwroot }}}">
+                <div class="ml-0">
+                    <div class="media">
+                        <img src="{{logofull}}" class="logo mr-1 w-75" alt="{{sitename}}">
+                    </div>
+                </div>
+            </a>
+        </li>
+    {{# flatnavigation }}
+        {{#showdivider}}
+            </ul>
+            </nav>
+            <nav class="list-group mt-1" aria-label="{{get_collectionlabel}}">
+            <ul>
+        {{/showdivider}}
+        {{#action}}
+            <li>
+                <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}} {{#classes}}{{.}} {{/classes}}" href="{{{action}}}" data-key="{{key}}" data-isexpandable="{{isexpandable}}" data-indent="{{get_indent}}" data-showdivider="{{showdivider}}" data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}" data-forceopen="{{forceopen}}" data-isactive="{{isactive}}" data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}" {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
+                    <div class="ml-{{get_indent}}">
+                        <div class="media">
+                            <span class="media-body font-weight-bold">{{{text}}}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        {{/action}}
+        {{^action}}
+            <li>
+                <div class="list-group-item {{#classes}}{{.}} {{/classes}}" data-key="{{key}}" data-isexpandable="{{isexpandable}}" data-indent="{{get_indent}}" data-showdivider="{{showdivider}}" data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}" data-forceopen="{{forceopen}}" data-isactive="{{isactive}}" data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}" {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
+                    <div class="ml-{{get_indent}}">
+                        <div class="media">
+                            <span class="media-body">{{{text}}}</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {{/action}}
+    {{/ flatnavigation }}
+    </ul>
+</nav>
