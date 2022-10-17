@@ -31,7 +31,7 @@ $THEME->enable_dock = false;
 $THEME->yuicssmodules = array();                                                                                                    
                                                                                                                                     
 // Most themes will use this rendererfactory as this is the one that allows the theme to override any other renderer.               
-$THEME->rendererfactory = 'theme_overridden_renderer_factory';                                                                      
+$THEME->rendererfactory = 'theme_overridden_renderer_factory';
                                                                                                                                     
 // This is a list of blocks that are required to exist on all pages for this theme to function correctly. For example               
 // bootstrap base requires the settings and navigation blocks because otherwise there would be no way to navigate to all the        
