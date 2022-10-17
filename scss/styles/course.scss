@@ -1,0 +1,35 @@
+#course-banner {    
+    height: 160px;
+    background-color: rgba(#EB4F5A, .25);
+}
+
+.pagelayout-course {
+    // Remove card and region borders.
+    .card,
+    #region-main {
+        border: 0;
+    }
+
+    // Move block region alongside heading for large devices.
+    @include media-breakpoint-up(xl) { 
+        #page-header>.col-12.pt-3 {
+            max-width: calc(100% - 375px);
+        }
+
+        [data-region="blocks-column"] {
+            position: relative;
+            top: -169px;
+            height: calc(100% + 169px);
+            margin-right: -15px;
+            background-color: $drawer-bg;
+            width: 375px;
+            padding-top: 15px;
+
+            .block {
+                margin-left: 15px;
+                margin-right: 15px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
