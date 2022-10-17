@@ -205,6 +205,7 @@ class populate_course_images {
             $category = $this->get_course_category($course->category);
             if (empty($category->idnumber)) {
                 mtrace("Skipping category as it has no idnumber $category->name");
+                continue;
             }
 
             if (!isset($this->catimages[$category->idnumber])) {
