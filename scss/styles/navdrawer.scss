@@ -1,5 +1,6 @@
 #nav-drawer {
-    .list-heading-logo {
-        border-bottom: 2px solid $primary;
+    .list-group-item:hover {
+        background-color: $primary;
+        color: $white;
     }
 }
