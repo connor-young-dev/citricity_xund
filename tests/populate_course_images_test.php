@@ -56,13 +56,88 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEquals(3, count($catimages[5]));
     }
 
+    public function test_set_catidnumbersbyid_no_idnumbers() {
+        $this->resetAfterTest();
+        $dg = $this->getDataGenerator();
+        $dg->create_category();
+        $dg->create_category();
+        $dg->create_category();
+        ob_start();
+        $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
+        ob_get_clean();
+        $catidnumbersbyid = util::get_restricted_property_value($instance, 'catidnumbersbyid');
+        $this->assertEmpty($catidnumbersbyid);
+    }
+
+    public function test_set_catidnumbersbyid_with_idnumbers() {
+        $this->resetAfterTest();
+        $dg = $this->getDataGenerator();
+        $cat1 = $dg->create_category(['idnumber' => 'cat1']);
+        $cat2 = $dg->create_category(['idnumber' => 'cat2']);
+        $cat3 = $dg->create_category();
+        ob_start();
+        $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
+        ob_get_clean();
+        $catidnumbersbyid = util::get_restricted_property_value($instance, 'catidnumbersbyid');
+        $this->assertNotEmpty($catidnumbersbyid);
+        $this->assertArrayHasKey($cat1->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($cat2->id, $catidnumbersbyid);
+        $this->assertArrayNotHasKey($cat3->id, $catidnumbersbyid);
+        $this->assertNotEmpty($catidnumbersbyid[$cat1->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$cat2->id]);
+    }
+
+    public function test_set_catidnumbersbyid_with_idnumbers_subcategories() {
+        $this->resetAfterTest();
+        $dg = $this->getDataGenerator();
+        $cat1 = $dg->create_category(['idnumber' => 'cat1']);
+        $subcat1 = $dg->create_category(['parent' => $cat1->id]);
+        $cat2 = $dg->create_category(['idnumber' => 'cat2']);
+        $subcat21 = $dg->create_category(['parent' => $cat2->id]);
+        $subcat22 = $dg->create_category(['parent' => $cat2->id]);
+
+        // Create a sub cat that has its own idnumber.
+        $subcat23 = $dg->create_category(['parent' => $cat2->id, 'idnumber' => 'subcat23']);
+        $subcat231 = $dg->create_category(['parent' => $subcat23->id]);
+        $cat3 = $dg->create_category();
+        ob_start();
+        $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
+        ob_get_clean();
+        $catidnumbersbyid = util::get_restricted_property_value($instance, 'catidnumbersbyid');
+        $this->assertNotEmpty($catidnumbersbyid);
+        $this->assertArrayHasKey($cat1->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($subcat1->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($cat2->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($subcat21->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($subcat22->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($subcat23->id, $catidnumbersbyid);
+        $this->assertArrayHasKey($subcat231->id, $catidnumbersbyid);
+        $this->assertArrayNotHasKey($cat3->id, $catidnumbersbyid);
+        $this->assertNotEmpty($catidnumbersbyid[$cat1->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$cat2->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$subcat1->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$subcat21->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$subcat22->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$subcat23->id]);
+        $this->assertNotEmpty($catidnumbersbyid[$subcat231->id]);
+
+        // Ensure sub categories have inherited the correct idnumber.
+        $this->assertEquals($cat1->idnumber, $catidnumbersbyid[$subcat1->id]);
+        $this->assertEquals($cat2->idnumber, $catidnumbersbyid[$subcat21->id]);
+        $this->assertEquals($cat2->idnumber, $catidnumbersbyid[$subcat22->id]);
+        // Here we are testing sub categories of sub categories.
+        $this->assertEquals($subcat23->idnumber, $catidnumbersbyid[$subcat23->id]);
+        $this->assertEquals($subcat23->idnumber, $catidnumbersbyid[$subcat231->id]);
+    }
+
     public function test_set_category_course_image_counts() {
         global $CFG;
 
         $this->resetAfterTest();
+
         // Check without courses returns 0 for each categoryid.
-        ob_start();
         // Note - set_category_course_image_counts is called on instantiation.
+        ob_start();
         $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
         $output = ob_get_clean();
         $imagecounts = util::get_restricted_property_value($instance, 'catimagecounts');
@@ -75,9 +150,9 @@ class populate_course_images_test extends \advanced_testcase {
         $catidnumber127 = $dg->create_category(['idnumber' => '127']);
         $catidnumber141 = $dg->create_category(['idnumber' => '141']);
 
-        ob_start();
-        \phpunit_util::call_internal_method($instance, 'set_category_course_image_counts', [], get_class($instance));
-        ob_get_clean();
+        // Reinitialize (calls set_category_course_image_counts).
+        $this->call_private_method($instance, 'init', []);
+
         $imagecounts = util::get_restricted_property_value($instance, 'catimagecounts');
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_1.png']);
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_2.png']);
@@ -93,38 +168,49 @@ class populate_course_images_test extends \advanced_testcase {
 
         // Check with courses + images in categories.
         $course5n1 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/assets/categoryimages/5/Xund_Icon_Wegweiser_1.png';
+        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
         $this->set_course_image_from_filepath($instance, $course5n1->id, $filepath);
-        ob_start();
-        \phpunit_util::call_internal_method($instance, 'set_category_course_image_counts', [], get_class($instance));
-        ob_get_clean();
+
+        // Reinitialize (calls set_category_course_image_counts).
+        $this->call_private_method($instance, 'init', []);
         $imagecounts = util::get_restricted_property_value($instance, 'catimagecounts');
         $this->assertEquals(1, $imagecounts[5]['Xund_Icon_Wegweiser_1.png']);
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_2.png']);
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_3.png']);
         $course5n2 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/assets/categoryimages/5/Xund_Icon_Wegweiser_2.png';
+        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_2.png';
         $this->set_course_image_from_filepath($instance, $course5n2->id, $filepath);
         $course5n3 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/assets/categoryimages/5/Xund_Icon_Wegweiser_3.png';
+        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_3.png';
         $this->set_course_image_from_filepath($instance, $course5n3->id, $filepath);
         $course5n4 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/assets/categoryimages/5/Xund_Icon_Wegweiser_1.png';
+        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
         $this->set_course_image_from_filepath($instance, $course5n4->id, $filepath);
-        ob_start();
-        \phpunit_util::call_internal_method($instance, 'set_category_course_image_counts', [], get_class($instance));
-        ob_get_clean();
+
+        // Reinitialize (calls set_category_course_image_counts).
+        $this->call_private_method($instance, 'init', []);
         $imagecounts = util::get_restricted_property_value($instance, 'catimagecounts');
         $this->assertEquals(2, $imagecounts[5]['Xund_Icon_Wegweiser_1.png']);
         $this->assertEquals(1, $imagecounts[5]['Xund_Icon_Wegweiser_2.png']);
         $this->assertEquals(1, $imagecounts[5]['Xund_Icon_Wegweiser_3.png']);
 
-        $leastused = \phpunit_util::call_internal_method($instance, 'get_least_used_image_for_categoryidnumber', ['5'], get_class($instance));
+        [, $leastused] = $this->call_private_method($instance, 'get_least_used_image_for_categoryidnumber', ['5']);
         $this->assertEquals('Xund_Icon_Wegweiser_2.png', $leastused);
     }
 
     private function set_course_image_from_filepath(populate_course_images $instance, int $courseid, string $filepath) {
         \phpunit_util::call_internal_method($instance, 'set_course_image_from_filepath',
             [$courseid, $filepath], get_class($instance));
+    }
+
+    private function call_private_method(populate_course_images $instance, string $method, array $params = [],
+        $silent = true) {
+        ob_start();
+        $methodresult = \phpunit_util::call_internal_method($instance, $method, $params, get_class($instance));
+        $clioutput = ob_get_clean();
+        if (!$silent) {
+            echo $clioutput;
+        }
+        return [$clioutput, $methodresult];
     }
 }

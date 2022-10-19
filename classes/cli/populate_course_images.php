@@ -29,14 +29,22 @@ use stdClass;
 class populate_course_images {
     private $catimages = [];
     private $catimagecounts = [];
+    // Category idnumbers hashed by id - note: carries the idnumber down to sub categories that don't have idnumbers.
+    private $catidnumbersbyid = [];
     private $imgdir = null;
 
     private function __construct($imgdir = null, $reset = false) {
         global $CFG;
+
+        $this->imgdir = $imgdir ?? $CFG->dirroot.'/theme/citricityxund/assets/categoryimages';
+        $this->init($reset);
+    }
+
+    private function init($reset = false): void {
         if ($reset) {
             $this->wipe_out_all_course_images();
         }
-        $this->imgdir = $imgdir ?? $CFG->dirroot.'/theme/citricityxund/assets/categoryimages';
+        $this->set_catidnumbersbyid();
         $this->set_cat_images();
         $this->set_category_course_image_counts();
     }
@@ -61,8 +69,6 @@ class populate_course_images {
     }
 
     private function set_cat_images(): void {
-        global $CFG;
-
         $dir = new \DirectoryIterator($this->imgdir);
         foreach ($dir as $fileinfo) {
             if ($fileinfo->isDot()) {
@@ -92,6 +98,50 @@ class populate_course_images {
                 }
             }
         }
+    }
+
+    private function get_ancestor_with_idnumber(stdClass $catrow, array $catsbypath) :?stdClass {
+        $parts = explode('/', $catrow->path);
+        array_pop($parts);
+        $parentpath = implode('/', $parts);
+        if (empty($parentpath)) {
+            return null;
+        }
+        $parent = $catsbypath[$parentpath];
+        if (!empty($parent->idnumber)) {
+            return $parent;
+        }
+        return $this->get_ancestor_with_idnumber($parent, $catsbypath);
+    }
+
+    /**
+     * Set category idnumbers hashed by id - carries the idnumber down to sub categories that don't have idnumbers.
+     * Note - looked at using core_course_category::get_all() but we don't want to treat invisible categories differently.
+     */
+    private function set_catidnumbersbyid(): void {
+        global $DB;
+        $sql = "SELECT id, parent, idnumber, path
+                FROM {course_categories} 
+                ORDER BY sortorder";
+        $catidnumbers = [];
+        $catsbypath = [];
+        $rs = $DB->get_recordset_sql($sql);
+        foreach ($rs as $row) {
+            $catsbypath[$row->path] = $row;
+        }
+        $rs->close();
+
+        foreach ($catsbypath as $row) {
+            if (!empty($row->idnumber)) {
+                $catidnumbers[$row->id] = $row->idnumber;
+            } else {
+                $parent = $this->get_ancestor_with_idnumber($row, $catsbypath);
+                if ($parent) {
+                    $catidnumbers[$row->id] = $parent->idnumber;
+                }
+            }
+        }
+        $this->catidnumbersbyid = $catidnumbers;
     }
 
     private function get_course_image(int $courseid): ?\stored_file {
@@ -184,11 +234,12 @@ class populate_course_images {
         foreach ($this->catimages as $catidnumber => $images) {
             $category = $this->get_course_category_by_idnumber($catidnumber);
             if (empty($category)) {
+                // Skip if category does not exist.
                 continue;
             }
             foreach ($images as $imagefile => $imagepath) {
-                if (!isset($catimgcounts[$category->idnumber][$imagefile])) {
-                    $catimgcounts[$category->idnumber][$imagefile] = 0;
+                if (!isset($catimgcounts[$catidnumber][$imagefile])) {
+                    $catimgcounts[$catidnumber][$imagefile] = 0;
                 }
             }
         }
@@ -201,15 +252,17 @@ class populate_course_images {
                 continue;
             }
 
-            // Get category for course.
             $category = $this->get_course_category($course->category);
-            if (empty($category->idnumber)) {
-                mtrace("Skipping category as it has no idnumber $category->name");
+
+            // Get category for course.
+            $categoryidnumber = $this->catidnumbersbyid[intval($course->category)] ?? null;
+            if (empty($categoryidnumber)) {
+                mtrace("Skipping category as it has no idnumber ($category->name)");
                 continue;
             }
 
-            if (!isset($this->catimages[$category->idnumber])) {
-                mtrace("Unsupported category - no asset folder corresponds to $category->idnumber");
+            if (!isset($this->catimages[$categoryidnumber])) {
+                mtrace("Unsupported category - no asset folder corresponds to $categoryidnumber");
                 continue;
             }
 
@@ -217,16 +270,16 @@ class populate_course_images {
             if ($courseimage) {
                 $imagefilename = $courseimage->get_filename();
 
-                if (!isset($catimgcounts[$category->idnumber])) {
-                    $catimgcounts[$category->idnumber] = [];
-                    foreach ($this->catimages[$category->idnumber] as $catimagefilename => $filepath) {
-                        $catimgcounts[$category->idnumber][$catimagefilename] = 0;
+                if (!isset($catimgcounts[$categoryidnumber])) {
+                    $catimgcounts[$categoryidnumber] = [];
+                    foreach ($this->catimages[$categoryidnumber] as $catimagefilename => $filepath) {
+                        $catimgcounts[$categoryidnumber][$catimagefilename] = 0;
                     }
                 }
-                if (!isset($catimgcounts[$category->idnumber][$imagefilename])) {
-                    $catimgcounts[$category->idnumber][$imagefilename] = 0;
+                if (!isset($catimgcounts[$categoryidnumber][$imagefilename])) {
+                    $catimgcounts[$categoryidnumber][$imagefilename] = 0;
                 }
-                $catimgcounts[$category->idnumber][$imagefilename]++;
+                $catimgcounts[$categoryidnumber][$imagefilename]++;
             }
         }
         $this->catimagecounts = $catimgcounts;
@@ -263,13 +316,14 @@ class populate_course_images {
                 continue;
             }
             $category = $this->get_course_category($course->category);
-            if (empty($category->idnumber)) {
+            $categoryidnumber = $this->catidnumbersbyid[intval($course->category)] ?? null;
+            if (empty($categoryidnumber)) {
                 mtrace("Skipping category without idnumber - $category->name");
                 continue;
             }
-            $leastusedimage = $this->get_least_used_image_for_categoryidnumber($category->idnumber);
+            $leastusedimage = $this->get_least_used_image_for_categoryidnumber($categoryidnumber);
             if (empty($leastusedimage)) {
-                mtrace("Course category does not appear to have images (\"{$category->name}\" - idnumber: $category->idnumber)");
+                mtrace("Course category does not appear to have images (\"{$category->name}\" - idnumber: $categoryidnumber)");
                 continue;
             }
             $courseimage = $this->get_course_image($course->id);
@@ -279,16 +333,16 @@ class populate_course_images {
             }
             mtrace("Adding course image $leastusedimage to course ($course->shortname)");
 
-            if (!isset($this->catimages[$category->idnumber][$leastusedimage])) {
-                throw new \coding_exception('Failed to get path for image '.$leastusedimage.' in category '.$category->idnumber);
+            if (!isset($this->catimages[$categoryidnumber][$leastusedimage])) {
+                throw new \coding_exception('Failed to get path for image '.$leastusedimage.' in category '.$categoryidnumber);
             }
-            $path = $this->catimages[$category->idnumber][$leastusedimage];
+            $path = $this->catimages[$categoryidnumber][$leastusedimage];
 
             // Add image to course.
             $this->set_course_image_from_filepath($course->id, $path);
 
             // Update counts.
-            $this->catimagecounts[$category->idnumber][$leastusedimage]++;
+            $this->catimagecounts[$categoryidnumber][$leastusedimage]++;
         }
     }
 
