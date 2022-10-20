@@ -17,7 +17,8 @@
  * Definition of theme_citricityxund scheduled tasks.
  *
  * @package   theme_citricityxund
- * @copyright 2022 Citricity Ltd http://citr.city
+ * @author    Guy Thomas
+ * @copyright 2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();

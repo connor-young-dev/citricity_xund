@@ -19,7 +19,7 @@
  *
  * @package    theme_citricitxund
  * @author     Guy Thomas
- * @copyright  2022 Citricity Ltd http://citri.city
+ * @copyright  2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
