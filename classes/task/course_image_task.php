@@ -24,7 +24,8 @@ use theme_citricityxund\cli\populate_course_images;
  * A schedule task for course image population.
  *
  * @package   theme_citricityxund
- * @copyright 2022 Citricity Ltd
+ * @author    Guy Thomas
+ * @copyright 2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_image_task extends \core\task\scheduled_task {

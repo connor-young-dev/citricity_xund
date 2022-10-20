@@ -21,9 +21,10 @@ use stdClass;
 /**
  * Cli routine to populate course images.
  *
- * @package    theme_citricityxund
- * @copyright  2022 Citricity http://citri.city
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_citricityxund
+ * @author    Guy Thomas
+ * @copyright 2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 class populate_course_images {
