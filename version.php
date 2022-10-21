@@ -11,7 +11,9 @@ $plugin->requires = '2016070700';
                                                                                                                                     
 // This is the component name of the plugin - it always starts with 'theme_'                                                        
 // for themes and should be the same as the name of the folder.                                                                     
-$plugin->component = 'theme_citricityxund';                                                                                                 
+$plugin->component = 'theme_citricityxund';
+
+$plugin->release = 'v1.0.1';
                                                                                                                                     
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [                                                                                                           
