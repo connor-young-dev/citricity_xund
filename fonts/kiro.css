@@ -1,0 +1,49 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4730168, 2022-04-25T09:51:14-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: Kiro-Bold by Dharma Type
+ * URL: https://www.myfonts.com/fonts/flat-it/kiro/bold/
+ *
+ * Webfont: Kiro-BoldItalic by Dharma Type
+ * URL: https://www.myfonts.com/fonts/flat-it/kiro/bold-italic/
+ *
+ * Webfont: Kiro-Light by Dharma Type
+ * URL: https://www.myfonts.com/fonts/flat-it/kiro/light/
+ *
+ * Webfont: Kiro-Regular by Dharma Type
+ * URL: https://www.myfonts.com/fonts/flat-it/kiro/regular/
+ *
+ *
+ * Webfonts copyright: Copyright (c) 2014 by Ryoichi Tsunekawa. All rights reserved.
+ *
+ * © 2022 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/482d38");
+
+@font-face {
+    font-family: "Kiro-BoldItalic";
+    src: url('./KiroBoldItalic/font.woff2') format('woff2'), url('./KiroBoldItalic/font.woff') format('woff');
+}
+@font-face {
+    font-family: "Kiro-Bold";
+    src: url('./KiroBold/font.woff2') format('woff2'), url('./KiroBold/font.woff') format('woff');
+}
+@font-face {
+    font-family: "Kiro-Regular";
+    src: url('./KiroRegular/font.woff2') format('woff2'), url('./KiroRegular/font.woff') format('woff');
+}
+@font-face {
+    font-family: "Kiro-Light";
+    src: url('./KiroLight/font.woff2') format('woff2'), url('./KiroLight/font.woff') format('woff');
+}
+
