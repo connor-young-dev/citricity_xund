@@ -335,7 +335,8 @@ class populate_course_images {
             mtrace("Adding course image $leastusedimage to course ($course->shortname)");
 
             if (!isset($this->catimages[$categoryidnumber][$leastusedimage])) {
-                throw new \coding_exception('Failed to get path for image '.$leastusedimage.' in category '.$categoryidnumber);
+                // This is most likely a custom image uploaded via a user, so it won't exist in catimages.
+                continue;
             }
             $path = $this->catimages[$categoryidnumber][$leastusedimage];
 
