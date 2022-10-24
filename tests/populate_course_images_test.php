@@ -45,12 +45,12 @@ use theme_citricityxund\util;
  */
 class populate_course_images_test extends \advanced_testcase {
 
-    public function test_set_cat_images() {
+    public function test_set_catimagesbycatidnumber() {
         ob_start();
         $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
-        \phpunit_util::call_internal_method($instance, 'set_cat_images', [], get_class($instance));
+        \phpunit_util::call_internal_method($instance, 'set_catimagesbycatidnumber', [], get_class($instance));
         $output = ob_get_clean();
-        $catimages = util::get_restricted_property_value($instance, 'catimages');
+        $catimages = util::get_restricted_property_value($instance, 'catimagesbycatidnumber');
         $this->assertStringContainsString('Checking course image usage throughout categories', $output);
         $this->assertNotEmpty($catimages);
         $this->assertEquals(3, count($catimages[5]));
