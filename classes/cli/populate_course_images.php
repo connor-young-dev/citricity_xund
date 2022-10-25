@@ -28,8 +28,9 @@ use stdClass;
  */
 
 class populate_course_images {
-    private $catimages = [];
-    private $catimagecounts = [];
+    private $defaultimages = []; // A flat array of all the default image names.
+    private $catimagesbycatidnumber = [];
+    private $catimagecounts = []; // This is used to work out the least used image within a category.
     // Category idnumbers hashed by id - note: carries the idnumber down to sub categories that don't have idnumbers.
     private $catidnumbersbyid = [];
     private $imgdir = null;
@@ -46,7 +47,7 @@ class populate_course_images {
             $this->wipe_out_all_course_images();
         }
         $this->set_catidnumbersbyid();
-        $this->set_cat_images();
+        $this->set_catimagesbycatidnumber();
         $this->set_category_course_image_counts();
     }
 
@@ -69,34 +70,38 @@ class populate_course_images {
         return new populate_course_images($imgdir);
     }
 
-    private function set_cat_images(): void {
+    private function set_catimagesbycatidnumber(): void {
         $dir = new \DirectoryIterator($this->imgdir);
         foreach ($dir as $fileinfo) {
             if ($fileinfo->isDot()) {
                 continue;
             }
-            if ($fileinfo->isDir()) {
-                // This is the folder name that should correspond to the category idnumber.
-                $catidnumber = $fileinfo->getFilename();
-                $catdir = new \DirectoryIterator($fileinfo->getPath().'/'.$catidnumber);
-                foreach ($catdir as $imagefileinfo) {
-                    if ($imagefileinfo->isDot()) {
-                        continue;
-                    }
-                    if (!isset($this->catimages[$catidnumber])) {
-                        $this->catimages[$catidnumber] = [];
-                    }
+            if (!$fileinfo->isDir()) {
+                continue;
+            }
 
-                    $imgexts = ['png', 'jpg', 'jpeg', 'svg', 'gif'];
-                    $ext = strtolower($imagefileinfo->getExtension());
-                    if (!in_array($ext, $imgexts)) {
-                        // Not an image.
-                        continue;
-                    }
-
-                    $this->catimages[$catidnumber][$imagefileinfo->getFilename()] =
-                        $imagefileinfo->getPath().'/'.$imagefileinfo->getFilename();
+            // This is the folder name that should correspond to the category idnumber.
+            $catidnumber = $fileinfo->getFilename();
+            $catdir = new \DirectoryIterator($fileinfo->getPath().'/'.$catidnumber);
+            foreach ($catdir as $imagefileinfo) {
+                if ($imagefileinfo->isDot()) {
+                    continue;
                 }
+                if (!isset($this->catimagesbycatidnumber[$catidnumber])) {
+                    $this->catimagesbycatidnumber[$catidnumber] = [];
+                }
+
+                $imgexts = ['png', 'jpg', 'jpeg', 'svg', 'gif'];
+                $ext = strtolower($imagefileinfo->getExtension());
+                if (!in_array($ext, $imgexts)) {
+                    // Not an image.
+                    continue;
+                }
+
+                $this->defaultimages[] = $imagefileinfo->getFilename();
+
+                $this->catimagesbycatidnumber[$catidnumber][$imagefileinfo->getFilename()] =
+                    $imagefileinfo->getPath().'/'.$imagefileinfo->getFilename();
             }
         }
     }
@@ -232,7 +237,7 @@ class populate_course_images {
         $this->trace_section_title('Checking course image usage throughout categories');
 
         // Initialise counts.
-        foreach ($this->catimages as $catidnumber => $images) {
+        foreach ($this->catimagesbycatidnumber as $catidnumber => $images) {
             $category = $this->get_course_category_by_idnumber($catidnumber);
             if (empty($category)) {
                 // Skip if category does not exist.
@@ -262,7 +267,7 @@ class populate_course_images {
                 continue;
             }
 
-            if (!isset($this->catimages[$categoryidnumber])) {
+            if (!isset($this->catimagesbycatidnumber[$categoryidnumber])) {
                 mtrace("Unsupported category - no asset folder corresponds to $categoryidnumber");
                 continue;
             }
@@ -270,10 +275,14 @@ class populate_course_images {
             $courseimage = $this->get_course_image($course->id);
             if ($courseimage) {
                 $imagefilename = $courseimage->get_filename();
+                if (!in_array($imagefilename, $this->defaultimages)) {
+                    // Skip this image since it is not a default image present in assets/categoryimages.
+                    continue;
+                }
 
                 if (!isset($catimgcounts[$categoryidnumber])) {
                     $catimgcounts[$categoryidnumber] = [];
-                    foreach ($this->catimages[$categoryidnumber] as $catimagefilename => $filepath) {
+                    foreach ($this->catimagesbycatidnumber[$categoryidnumber] as $catimagefilename => $filepath) {
                         $catimgcounts[$categoryidnumber][$catimagefilename] = 0;
                     }
                 }
@@ -334,11 +343,11 @@ class populate_course_images {
             }
             mtrace("Adding course image $leastusedimage to course ($course->shortname)");
 
-            if (!isset($this->catimages[$categoryidnumber][$leastusedimage])) {
-                // This is most likely a custom image uploaded via a user, so it won't exist in catimages.
+            if (!isset($this->catimagesbycatidnumber[$categoryidnumber][$leastusedimage])) {
+                // This is most likely a custom image uploaded via a user, so it won't exist in catimagesbycatidnumber.
                 continue;
             }
-            $path = $this->catimages[$categoryidnumber][$leastusedimage];
+            $path = $this->catimagesbycatidnumber[$categoryidnumber][$leastusedimage];
 
             // Add image to course.
             $this->set_course_image_from_filepath($course->id, $path);
