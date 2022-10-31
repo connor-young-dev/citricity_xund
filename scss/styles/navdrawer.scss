@@ -3,4 +3,12 @@
         background-color: $primary;
         color: $white;
     }
+
+    .list-group li {
+        &.home,
+        &.calendar,
+        &.privatefiles {
+            display: none;
+        }
+    }
 }
