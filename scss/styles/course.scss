@@ -1,6 +1,11 @@
-#course-banner {    
-    height: 160px;
-    background-color: rgba(#EB4F5A, .25);
+#course-banner {
+    background-color: rgba($primary, .25);
+    background-size: 40px;
+    height: 60px;
+    @include media-breakpoint-up(md) {    
+        height: 160px;
+        background-size: 120px;
+    }
 }
 
 .pagelayout-course {
