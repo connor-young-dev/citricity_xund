@@ -86,4 +86,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $this->render_from_template('core/full_header', $header);
     }
+
+    // Inherited - overridden to exclude $CFG->additionalhtmlfooter as we include this in the footer
+    // as a column.
+    public function standard_end_of_body_html() {
+        return $this->unique_end_html_token;
+    }
+
+    /**
+     * The additionalhtmlfooter has been split into its own renderer method.
+     * This allows us to place it in a column.
+     *
+     * @return string
+     */
+    public function additional_html_footer() {
+        global $CFG;
+        if ($this->page->pagelayout !== 'embedded' && !empty($CFG->additionalhtmlfooter)) {
+            return $CFG->additionalhtmlfooter;
+        }
+        return '';
+    }
 }
