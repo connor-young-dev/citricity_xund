@@ -2,4 +2,7 @@
     .helplink .icon {
         margin-left: 0;
     }
+    .footer-columns > .row > .col-sm-4:nth-child(1) {
+        max-width: 20rem;
+    }
 }

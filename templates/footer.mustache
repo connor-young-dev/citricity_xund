@@ -5,38 +5,45 @@
     </a>
 </div>
 <footer id="page-footer" class="py-5 px-4 bg-secondary text-light">
-    <div class="container-fluid">
-        <div id="course-footer">{{{ output.course_footer }}}</div>
+    <div class="container-fluid footer-columns">
+        {{! Two column grid for main footer info (col1) additional footer html (col2) }}
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="course-footer">{{{ output.course_footer }}}</div>
 
-        <div class="sitelink pb-1">
-            <a href="http://moodle.org/" class="d-inline-block aalink">
-                <img src="{{moodlelogo}}" class="logo mr-1" alt="{{#str}}moodlelogo, core{{/str}}">
-            </a>
+                <div class="sitelink pb-1">
+                    <a href="http://moodle.org/" class="d-inline-block aalink">
+                        <img src="{{moodlelogo}}" class="logo mr-1" alt="{{#str}}moodlelogo, core{{/str}}">
+                    </a>
+                </div>
+
+                {{{ output.login_info }}}
+
+                <div class="homelink pt-1">
+                    <a href="{{{ config.wwwroot }}}">
+                        {{#str}}home, core{{/str}}
+                    </a>
+                </div>
+
+                <div class="tool_usertours-resettourcontainer"></div>
+                <nav class="nav navbar-nav d-md-none" aria-label="{{#str}}custommenu, admin{{/str}}">
+                    {{# output.custom_menu_flat }}
+                        <ul class="list-unstyled pt-3">
+                            {{> theme_boost/custom_menu_footer }}
+                        </ul>
+                    {{/ output.custom_menu_flat }}
+                </nav>
+
+                {{{ output.standard_footer_html }}}
+
+                {{# output.page_doc_link }}
+                    <p class="helplink">{{{ output.page_doc_link }}}</p>
+                {{/ output.page_doc_link }}
+            </div>
+            <div class="col-sm-4">
+                {{{ output.additional_html_footer }}}
+            </div>
         </div>
-
-        {{{ output.login_info }}}
-
-        <div class="homelink pt-1">
-            <a href="{{{ config.wwwroot }}}">
-                {{#str}}home, core{{/str}}
-            </a>
-        </div>
-
-        <div class="tool_usertours-resettourcontainer"></div>
-        <nav class="nav navbar-nav d-md-none" aria-label="{{#str}}custommenu, admin{{/str}}">
-            {{# output.custom_menu_flat }}
-                <ul class="list-unstyled pt-3">
-                    {{> theme_boost/custom_menu_footer }}
-                </ul>
-            {{/ output.custom_menu_flat }}
-        </nav>
-
-        {{{ output.standard_footer_html }}}
-
-        {{# output.page_doc_link }}
-            <p class="helplink">{{{ output.page_doc_link }}}</p>
-        {{/ output.page_doc_link }}
-
-        {{{ output.standard_end_of_body_html }}}
     </div>
+    {{{ output.standard_end_of_body_html }}}
 </footer>
