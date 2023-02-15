@@ -4,10 +4,16 @@
         color: $white;
     }
 
-    .list-group li {
-        &.home,
-        &.calendar,
-        &.privatefiles {
+    .list-group {
+        // Admin link spacing.
+        [href$='/admin/search.php'] {
+            margin-top: 0.5rem;
+        }
+
+        // Remove home, calendar and private files link using url (classes no longer exist).
+        [href$='/?redirect=0'],
+        [href$='/calendar/view.php?view=month'],
+        [href$='/user/files.php'] {
             display: none;
         }
     }

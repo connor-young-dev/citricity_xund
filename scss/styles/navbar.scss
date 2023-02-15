@@ -5,7 +5,7 @@
 .navbar.fixed-top {
     height: $navbar-height;
     .navbar-brand {
-        height: $navbar-height - 5px;
+        height: $navbar-height;
 
         .logo {
             max-height: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
@@ -46,5 +46,18 @@
         &:hover {
             color: darken(#65c1be, 15%);
         }
+    }
+}
+
+.primary-navigation .navigation .nav-link {
+    color: $navbar-light-color;
+    border-bottom: none;
+
+    &.active {
+        color: $navbar-light-hover-color;
+    }
+
+    &:hover {
+        background-color: transparent;
     }
 }
