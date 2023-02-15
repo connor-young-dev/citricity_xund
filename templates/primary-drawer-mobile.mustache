@@ -2,7 +2,7 @@
     <div class="list-group">
         {{#mobileprimarynav}}
             {{#haschildren}}
-            <a id="drop-down-{{sort}}" href="#" class="list-group-item list-group-item-action icons-collapse-expand collapsed d-flex" data-toggle="collapse" data-target="#drop-down-menu-{{sort}}" aria-expanded="false" aria-controls="drop-down-menu-{{sort}}">
+            <a id="drop-down-{{sort}}" href="#" class="font-weight-bold list-group-item list-group-item-action icons-collapse-expand collapsed d-flex" data-toggle="collapse" data-target="#drop-down-menu-{{sort}}" aria-expanded="false" aria-controls="drop-down-menu-{{sort}}">
                 {{{text}}}
                 <span class="ml-auto expanded-icon icon-no-margin mx-2">
                     {{#pix}} t/expanded, core {{/pix}}
@@ -17,7 +17,7 @@
                     </span>
                 </span>
             </a>
-            <div class="collapse list-group-item p-0 border-0" role="menu" id="drop-down-menu-{{sort}}" aria-labelledby="drop-down-{{sort}}">
+            <div class="collapse font-weight-bold list-group-item p-0 border-0" role="menu" id="drop-down-menu-{{sort}}" aria-labelledby="drop-down-{{sort}}">
                 {{#children}}
                     {{^divider}}
                             <a href="{{{url}}}" class="pl-5 bg-light list-group-item list-group-item-action">{{{text}}}</a>
@@ -26,7 +26,7 @@
             </div>
             {{/haschildren}}
             {{^haschildren}}
-            <a href="{{{url}}}" class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}} {{#classes}}{{.}} {{/classes}}" {{#isactive}}aria-current="true"{{/isactive}}>
+            <a href="{{{url}}}" class="font-weight-bold list-group-item list-group-item-action {{#isactive}}active{{/isactive}} {{#classes}}{{.}} {{/classes}}" {{#isactive}}aria-current="true"{{/isactive}}>
                 {{{text}}}
             </a>
             {{/haschildren}}

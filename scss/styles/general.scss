@@ -34,3 +34,24 @@ body {
 .form-control {
     border-radius: $input-border-radius;
 }
+
+// Page spacing.
+@include media-breakpoint-up(md) {
+    #page.drawers {
+        padding-left: 0;
+        padding-right: 0;
+
+        #topofscroll {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #page.drawers #topofscroll {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 100%;
+    }
+}
