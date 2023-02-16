@@ -5,9 +5,32 @@
         border: none;
     }
 
+
+    // Remove padding to allow block background full screen.
+    #page.drawers #topofscroll,
+    #page.drawers div[role="main"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #page {
+        overflow-x: hidden;
+    }
+    #topofscroll {
+        #page-header,
+        .block,
+        .add_block_button {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+    }
+
     // Alternate block background color.
-    #block-region-content>.block:nth-child(odd) {
+    #block-region-content>.block:nth-of-type(even) {
         background-color: darken($body-bg, 3%);
+    }
+
+    .block-myoverview {
+        padding: 0rem;
     }
 
     // Recently accessed courses.
@@ -17,6 +40,16 @@
         .page-link {
             border: 0;
             background-color: transparent;
+        }
+    }
+
+    // Forced in Boost.
+    .block_myoverview {
+        border: 0;
+        & > .card-body {
+            padding-top: 2rem !important; /* stylelint-disable-line declaration-no-important */
+            padding-left: 2rem !important; /* stylelint-disable-line declaration-no-important */
+            padding-right: 2rem !important; /* stylelint-disable-line declaration-no-important */
         }
     }
 
@@ -38,6 +71,7 @@
     border-radius: 0.75rem;
     border: 0;
     box-shadow: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.15);
+    width: 300px;
 
     .dashboard-card-img {
         border-top-left-radius: 0.75rem;
@@ -65,10 +99,17 @@
             background-color: rgba(#65c1be, .25);
         }
     }
+
+    .dashboard-card-footer {
+        border-radius: 0.75rem;
+    }
 }
 
 // Consistent width dashboard cards.
-body.drawer-open-left .dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
+.dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
     width: 300px;
+    max-width: 100%;
 }
-
+.dashboard-card-deck.one-row {
+    float: left;
+}

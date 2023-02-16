@@ -55,3 +55,11 @@ body {
         max-width: 100%;
     }
 }
+
+// Link and categories use suitable colour variables. 
+.block .block-cards .btn-link {
+    color: $link-color;
+}
+.block .block-cards span.categoryname {
+    color: unset;
+}
