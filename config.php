@@ -52,12 +52,12 @@ $THEME->scss = function($theme) {
 $THEME->haseditswitch = true;
 
 $THEME->layouts = [
-    // Most backwards compatible layout without the blocks - this is the layout used by default.
+    // Most backwards compatible layout without the blocks.
     'base' => array(
         'file' => 'drawers.php',
         'regions' => array(),
     ),
-    // Standard layout with blocks, this is recommended for most pages with general information.
+    // Standard layout with blocks.
     'standard' => array(
         'file' => 'drawers.php',
         'regions' => array('side-pre'),
@@ -94,11 +94,19 @@ $THEME->layouts = [
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
+    // My courses page.
+    'mycourses' => array(
+        'file' => 'drawers.php',
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+        'options' => array('nonavbar' => true),
+    ),
     // My dashboard page.
     'mydashboard' => array(
         'file' => 'drawers.php',
-        'regions' => [],
-        'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
+        'regions' => array('side-pre'),
+        'defaultregion' => 'side-pre',
+        'options' => array('nonavbar' => true, 'langmenu' => true),
     ),
     // My public page.
     'mypublic' => array(
@@ -112,17 +120,31 @@ $THEME->layouts = [
         'options' => array('langmenu' => true),
     ),
 
-    // Pages that appear in pop-up windows - no navigation, no blocks, no header.
+    // Pages that appear in pop-up windows - no navigation, no blocks, no header and bare activity header.
     'popup' => array(
         'file' => 'columns1.php',
         'regions' => array(),
-        'options' => array('nofooter' => true, 'nonavbar' => true),
+        'options' => array(
+            'nofooter' => true,
+            'nonavbar' => true,
+            'activityheader' => [
+                'notitle' => true,
+                'nocompletion' => true,
+                'nodescription' => true
+            ]
+        )
     ),
     // No blocks and minimal footer - used for legacy frame layouts only!
     'frametop' => array(
         'file' => 'columns1.php',
         'regions' => array(),
-        'options' => array('nofooter' => true, 'nocoursefooter' => true),
+        'options' => array(
+            'nofooter' => true,
+            'nocoursefooter' => true,
+            'activityheader' => [
+                'nocompletion' => true
+            ]
+        ),
     ),
     // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
     'embedded' => array(
@@ -141,7 +163,7 @@ $THEME->layouts = [
     'print' => array(
         'file' => 'columns1.php',
         'regions' => array(),
-        'options' => array('nofooter' => true, 'nonavbar' => false),
+        'options' => array('nofooter' => true, 'nonavbar' => false, 'noactivityheader' => true),
     ),
     // The pagelayout used when a redirection is occuring.
     'redirect' => array(
