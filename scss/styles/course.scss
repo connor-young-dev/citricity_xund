@@ -11,18 +11,14 @@
 // Full width header layout on course pages.
 .pagelayout-course,
 .pagelayout-incourse {
-    #page.drawers #topofscroll {
+    #page.drawers #topofscroll,
+    #page-header {
         padding-left: 0;
         padding-right: 0;
     }
 
     #page {
         overflow-x: hidden;
-    }
-
-    #page-header {
-        padding-left: 0;
-        padding-right: 0;
     }
 
     .page-context-header,
