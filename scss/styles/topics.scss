@@ -1,27 +1,4 @@
-.course-content ul.topics li.section {
-    position: relative;
-    margin-top: 0;
-    padding-bottom: 1rem;
-    padding-top: 2rem;
-
-    &#section-0 {
-        padding-top: 0;
-    }
-
-    .section_availability {
-        position: absolute;
-        top: 0;
-
-        .availabilityinfo {
-            font-size: .75em;
-            font-style: italic;
-            color: #EB4F5A;
-
-            .badge-info {
-                font-size: .75rem;
-                background-color: #EB4F5A;
-                font-style: normal;
-            }
-        }
-    }
+.section_availability.course-description-item {
+    background-color: #EB4F5A;
+    color: #fff;
 }

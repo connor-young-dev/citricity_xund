@@ -8,6 +8,34 @@
     }
 }
 
+// Full width header layout on course pages.
+.pagelayout-course,
+.pagelayout-incourse {
+    #page.drawers #topofscroll,
+    #page-header {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .page-context-header,
+    #page-navbar,
+    #page-content,
+    .secondary-navigation {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+        .page-context-header,
+        #page-navbar,
+        #page-content,
+        .secondary-navigation {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+}
+
 .pagelayout-course {
     // Remove card and region borders.
     .card,
