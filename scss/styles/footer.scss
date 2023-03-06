@@ -11,3 +11,12 @@
         text-decoration: underline;
     }
 }
+
+// Footer positioning at bottom of viewport.
+#page-wrapper #page {
+    min-height: calc(100vh - #{$navbar-height});
+
+    #topofscroll {
+        flex: 1;
+    }
+}
