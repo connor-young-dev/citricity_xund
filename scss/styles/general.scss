@@ -63,3 +63,26 @@ body {
 .block .block-cards span.categoryname {
     color: unset;
 }
+
+// Drawer toggles.
+.drawer-toggles .drawer-toggler .btn {
+    background-color: $secondary;
+    color: #fff;
+}
+
+// Edit button.
+.custom-control-label::before {
+    background-color: #fff;
+}
+.custom-switch .custom-control-label::after {
+    background-color: $secondary;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: $secondary;
+    background-color: $secondary;
+}
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    background-color: #fff;
+}

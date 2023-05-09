@@ -68,3 +68,50 @@
         }
     }
 }
+
+// Course index.
+#courseindex-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.courseindex-section:focus {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+.courseindex .courseindex-item {
+    background-color: #fff;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #f6f8f9;
+    position: relative;
+
+    .courseindex-link,
+    .courseindex-chevron {
+        color: $primary;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: darken(#fff, 5%);
+
+        .courseindex-link,
+        .courseindex-chevron {
+            color: $primary;
+        }
+    }
+
+    &.restrictions .courseindex-locked {
+        display: block;
+        position: absolute;
+        right: 0.75rem;
+
+        >.icon {
+            background-color: rgba(235,79,90,.5);
+            vertical-align: middle;
+            line-height: 20px;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            border-radius: 50%;
+        }
+    }
+}

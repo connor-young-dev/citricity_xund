@@ -21,6 +21,15 @@
         .add_block_button {
             padding-left: 3rem;
             padding-right: 3rem;
+
+            >* {
+                max-width: 1140px;
+                width: 100%;
+                margin: auto;
+            }
+        }
+        .add_block_button>* {
+            display: block;
         }
     }
 
@@ -30,7 +39,7 @@
     }
 
     .block-myoverview {
-        padding: 0rem;
+        padding: 0;
     }
 
     // Recently accessed courses.
@@ -106,9 +115,12 @@
 }
 
 // Consistent width dashboard cards.
-.dashboard-card-deck:not(.fixed-width-cards) .dashboard-card {
-    width: 300px;
-    max-width: 100%;
+.dashboard-card-deck {
+    &.fixed-width-cards .dashboard-card,
+    &:not(.fixed-width-cards) .dashboard-card {
+        width: 353px;
+        max-width: 100%;
+    }
 }
 .dashboard-card-deck.one-row {
     float: left;
