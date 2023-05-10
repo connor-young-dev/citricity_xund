@@ -127,3 +127,16 @@ $spacers: (
     5: ($spacer * 2),
     6: ($spacer * 3)
 ) !default;
+
+$activity-icon-colors: () !default;
+$activity-icon-colors: map-merge(
+    (
+      "administration": #424242,
+      "assessment": #2C5B89,
+      "collaboration": #2A6967,
+      "communication": #8C1018,
+      "content": #4E6575,
+      "interface": #424242
+    ),
+    $activity-icon-colors
+);
