@@ -78,7 +78,8 @@
     margin-bottom: 3px;
     margin-top: 3px;
 }
-.courseindex .courseindex-item {
+.courseindex .courseindex-item,
+.courseindex .courseindex-item.dimmed {
     background-color: #fff;
     padding: 0.75rem 1.25rem;
     border: 1px solid #f6f8f9;
@@ -112,6 +113,80 @@
             height: 20px;
             color: #fff;
             border-radius: 50%;
+        }
+    }
+}
+
+#page-course-view-topics {
+
+    // Activities.
+    .activity-item:not(.activityinline) {
+        padding: 0;
+        border-radius: 5px;
+        position: relative;
+
+        .description {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+
+            .course-description-item.isrestricted {
+                padding: 0.25rem 0.75rem;
+                border-radius: 4px;
+                background-color: rgba(235, 79, 90, .5);
+                color: #fff;
+
+                .icon {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    .activityiconcontainer {
+        width: $activity-containericon-width;
+        height: $activity-containericon-height;
+
+        &.small {
+            width: $activity-containericon-width - 10px;
+            height: $activity-containericon-height - 10px;
+        }
+    }
+
+    .activityname {
+        font-size: $font-size-lg;
+    }
+
+    .activity-information {
+        margin-top: 1.25rem;
+        margin-right: 0.75rem;
+    }
+
+    .course-content .section-summary {
+        border-radius: 5px;
+    }
+
+    .section.course-section {
+        padding-top: 2.25rem;
+        position: relative;
+
+        .content>.description {
+            display: inline-block;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.75rem;
+            margin: 0 !important;
+
+            .section_availability.course-description-item {
+                padding: .25rem .75rem;
+                background-color: rgba(235, 79, 90, .5);
+                border-radius: 4px;
+
+                .icon {
+                    vertical-align: middle;
+                }
+            }
+
         }
     }
 }
