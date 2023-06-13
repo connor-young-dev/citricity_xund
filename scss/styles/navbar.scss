@@ -49,15 +49,26 @@
     }
 }
 
-.primary-navigation .navigation .nav-link {
-    color: $navbar-light-color;
-    border-bottom: none;
-
-    &.active {
-        color: $navbar-light-hover-color;
+.primary-navigation .navigation {
+    li.nav-item {
+        &[data-key='home'],
+        &[data-key='myhome'],
+        &[data-key='mycourses'],
+        &[data-key='siteadminnode'] {
+            display: none;
+        }
     }
 
-    &:hover {
-        background-color: transparent;
+    .nav-link {
+        color: $navbar-light-color;
+        border-bottom: none;
+
+        &.active {
+            color: $navbar-light-hover-color;
+        }
+
+        &:hover {
+            background-color: transparent;
+        }
     }
 }
