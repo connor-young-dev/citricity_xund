@@ -119,6 +119,14 @@
 
 #page-course-view-topics {
 
+    .section {
+        .label {
+            .contentwithoutlink {
+                padding-right: 0;
+            }
+        }
+    }
+
     // Activities.
     .activity-item:not(.activityinline) {
         padding: 0;
@@ -126,9 +134,8 @@
         position: relative;
 
         .description {
-            position: absolute;
-            bottom: 0.75rem;
-            right: 0.75rem;
+            position: relative;
+            padding: 0 1rem;
 
             .course-description-item.isrestricted {
                 padding: 0.25rem 0.75rem;
