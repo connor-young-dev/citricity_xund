@@ -86,3 +86,8 @@ body {
 .custom-switch .custom-control-input:checked~.custom-control-label::after {
     background-color: #fff;
 }
+
+// Link colour just for body copy.
+.generalbox p a {
+    color: $body-link-color;
+}
