@@ -61,6 +61,7 @@ $navbar-light-color:                $primary !default;
 $navbar-light-hover-color:          darken($primary, 15%) !default;
 $primary-nav-padding-y:             1rem !default;
 $navbar-nav-link-padding-x:         1.25rem !default;
+$nav-tabs-link-active-color:        $primary;
 
 // Breadcrumbs
 $breadcrumb-padding-y:              .25rem !default;

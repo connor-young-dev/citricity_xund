@@ -2,3 +2,14 @@
 .coursebox .courseimage {
     display: none;
 }
+
+// Remove Boost small styles to category names.
+.course_category_tree .category > .info > .categoryname {
+    @include font-size($h3-font-size);
+}
+
+// Increase size of coursenames.
+.coursebox>.info>.coursename {
+    font-size: $font-size-lg;
+    font-weight: bold;
+}
