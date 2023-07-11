@@ -1,0 +1,21 @@
+.que .formulation {
+  @include alert-variant(#F8F9FC, #F8F9FC, $body-copy-color);
+}
+
+.path-mod-quiz #region-main {
+  .que {
+    position: relative;
+    .info {
+      position: absolute;
+      height: 100%;
+      background-color: #F0F3F8;
+      border-color: #F0F3F8;
+    }
+
+    .qtext {
+      font-weight: bold;
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
+  }
+}
