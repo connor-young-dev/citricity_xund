@@ -23,6 +23,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Renders the "breadcrumb" for all pages in citricityxund.
+     *
+     * @return string the HTML for the navbar.
+     */
+    public function navbar(): string {
+        $newnav = new \theme_citricityxund\boostnavbar($this->page);
+        return $this->render_from_template('core/navbar', $newnav);
+    }
+
+    /**
      * Return the url for course header image or one of the defaults.
      *
      * @param  Object $course  - optional course, otherwise, this course.

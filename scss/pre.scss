@@ -43,7 +43,8 @@ $enable-rounded: false !default;
 $enable-responsive-font-sizes: true !default;
 
 // Body
-$body-color:    #000 !default;
+$body-color: $primary !default;
+$body-copy-color: #000 !default;
 $headings-color: $primary !default;
 $body-link-color: $secondary !default;
 $course-content-maxwidth: 100% !default;

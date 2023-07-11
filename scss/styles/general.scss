@@ -88,6 +88,9 @@ body {
 }
 
 // Link colour just for body copy.
-.generalbox p a {
-    color: $body-link-color;
+#page-content p {
+    color: $body-copy-color;
+    a {
+        color: $body-link-color;
+    }
 }
