@@ -111,6 +111,13 @@ class boostnavbar extends \theme_boost\boostnavbar {
         }
 
         $this->remove_no_link_items($removesections);
+
+        // Remove breadcrumb if only one element, otherwise this is bad UX (unless in course).
+        if ($this->page->context->contextlevel != CONTEXT_COURSE) {
+            if ($this->item_count() <= 1) {
+                $this->clear_items();
+            }
+        }
     }
 
     /**
