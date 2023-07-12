@@ -5,6 +5,11 @@
 .path-mod-quiz #region-main {
   .que {
     position: relative;
+    h3.no {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.9em;
+    }
     .info {
       position: absolute;
       height: 100%;
@@ -13,9 +18,22 @@
     }
 
     .qtext {
-      font-weight: bold;
-      font-size: 1.4em;
+      font-size: unset;
       margin-bottom: 0.5em;
     }
   }
+}
+
+// Drag and drop basic styling.
+.que.ddwtos .draghome,
+.que.ddwtos .drop {
+  border: 0 !important;
+  box-sizing: content-box;
+  padding: 0.25rem 1rem;
+  text-align: left;
+  border-radius: 0 !important;
+}
+
+.que.ddwtos .group4 {
+  background-color: #ACDADC;
 }
