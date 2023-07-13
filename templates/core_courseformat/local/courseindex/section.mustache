@@ -1,0 +1,35 @@
+<a
+    class="courseindex-section d-block {{#current}}current{{/current}}"
+    href="{{{sectionurl}}}"
+    id="{{uniqid}}-course-index-section-{{id}}"
+    data-for="section"
+    data-id="{{id}}"
+    data-number="{{number}}"
+    role="treeitem"
+    aria-owns="courseindexsection{{number}}"
+>
+    <div class="courseindex-item d-flex
+        {{^visible}}dimmed{{/visible}}
+        {{#hasrestrictions}}restrictions{{/hasrestrictions}}
+        courseindex-section-title" data-for="section_item"
+    >
+        <span
+            class="courseindex-link text-truncate"
+            tabindex="-1"
+        >
+            {{{title}}}
+        </span>
+        <span class="current-badge badge badge-primary ml-2 px-2 rounded-pill">
+            {{highlighted}}
+        </span>
+        <span class="courseindex-locked ml-1" data-for="cm_name">
+            {{#pix}} t/locked, core {{/pix}}
+        </span>
+        <span class="dragicon ml-auto">{{#pix}}i/dragdrop{{/pix}}</span>
+    </div>
+</a>
+{{#js}}
+    require(['core_courseformat/local/courseindex/section'], function(component) {
+        component.init('{{uniqid}}-course-index-section-{{id}}');
+    });
+{{/js}}
