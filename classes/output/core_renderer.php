@@ -123,7 +123,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param context_header $contextheader Header bar object.
      * @return string HTML for the header bar.
      */
-    protected function render_context_header(\context_header $contextheader) {
+    protected function render_context_header(\context_header $contextheader): string {
 
         // Generate the heading first and before everything else as we might have to do an early return.
         if (!isset($contextheader->heading)) {

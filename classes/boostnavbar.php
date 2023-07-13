@@ -1,9 +1,32 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace theme_citricityxund;
 
 use moodle_url;
 
+/**
+ * Creates a navbar for citricity xund theme.
+ *
+ * This class is copied and modified from /theme/boost/classes/boostnavbar.php
+ *
+ * @package    theme_citricityxund
+ * @copyright  based on code from theme_boost by Adrian Greeve
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class boostnavbar extends \theme_boost\boostnavbar {
 
     /**
@@ -161,7 +184,7 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
         $this->items = array_values($this->items);
         // Set the last item to last item if it is not.
-        $lastitem = $this->items[$itemcount - 1];
+        $lastitem = end($this->items);
         if (is_a($lastitem, 'breadcrumb_navigation_node') && !$lastitem->is_last()) {
             $lastitem->set_last(true);
         }
