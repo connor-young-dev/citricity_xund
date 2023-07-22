@@ -127,3 +127,11 @@
 .dashboard-card-deck.one-row {
     float: left;
 }
+
+// Fix recently accessed items in side-pre.
+.block_recentlyaccesseditems {
+    aside[id^="block-region-side-"] & .dashboard-card-deck.one-row {
+        width: 100%;
+        margin-bottom: $spacer;
+    }
+}
