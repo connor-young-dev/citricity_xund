@@ -182,13 +182,18 @@
     }
 
     .section.course-section {
-        padding-top: 2.25rem;
+        padding-top: 1.75rem;
+        padding-bottom: 0.5rem;
         position: relative;
+
+        .sectionname {
+            margin-bottom: 0;
+        }
 
         .content>.description {
             display: inline-block;
             position: absolute;
-            top: 1.5rem;
+            top: 1rem;
             right: 1.75rem;
             margin: 0 !important;
 
@@ -204,4 +209,9 @@
 
         }
     }
+}
+
+[id*="coursecontentcollapse"]>[data-for="sectioninfo"] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
