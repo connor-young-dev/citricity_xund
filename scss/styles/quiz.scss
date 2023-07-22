@@ -1,5 +1,6 @@
 .que .formulation {
   @include alert-variant(#F8F9FC, #F8F9FC, $body-copy-color);
+  min-height: 190px;
 }
 
 .path-mod-quiz #region-main {
