@@ -8,8 +8,22 @@
     @include font-size($h3-font-size);
 }
 
-// Increase size of coursenames.
-.coursebox > .info > .coursename {
-    font-size: $font-size-lg;
-    font-weight: bold;
+.coursebox {
+    &.even {
+        background-color: $gray-100;
+    }
+
+    > .info > .coursename {
+        @include font-size($h4-font-size);
+        font-weight: bold;
+    }
+}
+
+.subcategories,
+#frontpage-category-names,
+#frontpage-category-combo {
+    .coursebox > .info > .coursename a {
+        padding-left: 25px;
+        background-position: left 0.4em;
+    }
 }
