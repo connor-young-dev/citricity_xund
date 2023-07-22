@@ -13,7 +13,11 @@
     }
 
     .nav-link {
-        font-weight: bold;
+        &:hover,
+        &:focus {
+            font-weight: bold;
+            background-color: #F5F8FB !important;
+        }
     }
 
     .nav-drawer-button {
