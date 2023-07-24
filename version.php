@@ -13,7 +13,7 @@ $plugin->requires = '2022041900'; // Moodle 4.0.
 // for themes and should be the same as the name of the folder.                                                                     
 $plugin->component = 'theme_citricityxund';
 
-$plugin->release = 'v1.0.4';
+$plugin->release = 'v1.0.8';
                                                                                                                                     
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [                                                                                                           
