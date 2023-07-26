@@ -226,3 +226,31 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+// Change warning badge on course.
+.activity-item.hiddenactivity .description .course-description-item,
+.activity-item.hiddenactivity .activityiconcontainer,
+.activity-item.hiddenactivity .badge {
+    &.badge-warning {
+        background-color: rgba(235,79,90,.5);
+        color: #fff;
+        border-radius: 4px;
+        padding: .5rem .75rem;
+        margin-left: calc(#{$activity-containericon-width} + 1rem);
+        position: relative;
+        padding-left: 2.5rem;
+
+        &:before {
+            position: absolute;
+            content: $fa-var-eye-slash; /* Unicode value for the eye-slash icon from FontAwesome */
+            font-family: FontAwesome;
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 16px;
+            width: 16px;
+            height: 16px;/* Adjust this value to add spacing between the icon and content */
+            left: 0.75rem;
+            top: 0.3rem;
+        }
+    }
+}

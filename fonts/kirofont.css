@@ -31,19 +31,46 @@
 @import url("//hello.myfonts.net/count/482d38");
 
 @font-face {
-    font-family: "Kiro-BoldItalic";
-    src: url('./KiroBoldItalic/font.woff2') format('woff2'), url('./KiroBoldItalic/font.woff') format('woff');
-}
-@font-face {
-    font-family: "Kiro-Bold";
-    src: url('./KiroBold/font.woff2') format('woff2'), url('./KiroBold/font.woff') format('woff');
-}
-@font-face {
-    font-family: "Kiro-Regular";
-    src: url('./KiroRegular/font.woff2') format('woff2'), url('./KiroRegular/font.woff') format('woff');
-}
-@font-face {
-    font-family: "Kiro-Light";
+    font-family: "Kiro";
     src: url('./KiroLight/font.woff2') format('woff2'), url('./KiroLight/font.woff') format('woff');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroRegular/font.woff2') format('woff2'), url('./KiroRegular/font.woff') format('woff');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroRegular/font.woff2') format('woff2'), url('./KiroRegular/font.woff') format('woff');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroBold/font.woff2') format('woff2'), url('./KiroBold/font.woff') format('woff');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroBold/font.woff2') format('woff2'), url('./KiroBold/font.woff') format('woff');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroBoldItalic/font.woff2') format('woff2'), url('./KiroBoldItalic/font.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Kiro";
+    src: url('./KiroBoldItalic/font.woff2') format('woff2'), url('./KiroBoldItalic/font.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
 }
 

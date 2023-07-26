@@ -21,6 +21,6 @@ function theme_citricityxund_get_main_scss_content($theme) {
 
 function theme_citricityxund_before_standard_html_head(): string {
     global $CFG;
-    $kirourl = $CFG->wwwroot.'/theme/citricityxund/fonts/kiro.css';
+    $kirourl = $CFG->wwwroot.'/theme/citricityxund/fonts/kirofont.css';
     return '<link rel="stylesheet" href="'.$kirourl.'">';
 }

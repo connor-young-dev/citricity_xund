@@ -6,6 +6,7 @@
 // Remove Boost small styles to category names.
 .course_category_tree .category > .info > .categoryname {
     @include font-size($h3-font-size);
+    font-weight: $headings-font-weight;
 }
 
 .coursebox {
@@ -13,9 +14,15 @@
         background-color: $gray-100;
     }
 
-    > .info > .coursename {
-        @include font-size($h4-font-size);
-        font-weight: bold;
+    > .info {
+        > .coursename {
+            @include font-size($h4-font-size);
+            font-weight: bold;
+        }
+
+        .moreinfo {
+            display: none;
+        }
     }
 }
 
