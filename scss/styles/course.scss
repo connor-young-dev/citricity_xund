@@ -173,7 +173,7 @@
     }
 
     .activity-information {
-        margin-top: 1.25rem;
+        margin-top: 13px;
         margin-right: 0.75rem;
     }
 
@@ -189,13 +189,18 @@
                 padding-bottom: 0.5rem;
                 margin-bottom: 1rem;
             }
+            border-bottom: 0;
         }
     }
 
     .section.course-section {
-        padding-top: 1.75rem;
-        padding-bottom: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         position: relative;
+
+        .course-content-item-content {
+            margin-top: 1rem !important;
+        }
 
         .sectionname {
             margin-bottom: 0;
@@ -242,8 +247,8 @@
 
         &:before {
             position: absolute;
-            content: $fa-var-eye-slash; /* Unicode value for the eye-slash icon from FontAwesome */
-            font-family: FontAwesome;
+            @extend .fa-regular;
+            content: fa-content($fa-var-eye-slash);
             display: inline-block;
             margin-right: 5px;
             font-size: 16px;
