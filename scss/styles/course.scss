@@ -217,6 +217,7 @@
                 padding: .25rem .75rem;
                 background-color: rgba(235, 79, 90, .5);
                 border-radius: 4px;
+                margin-top: 0.5rem;
 
                 .icon {
                     vertical-align: middle;
@@ -235,7 +236,8 @@
 // Change warning badge on course.
 .activity-item.hiddenactivity .description .course-description-item,
 .activity-item.hiddenactivity .activityiconcontainer,
-.activity-item.hiddenactivity .badge {
+.activity-item.hiddenactivity .badge,
+.course-section-header .badge {
     &.badge-warning {
         background-color: rgba(235,79,90,.5);
         color: #fff;
@@ -256,6 +258,19 @@
             height: 16px;/* Adjust this value to add spacing between the icon and content */
             left: 0.75rem;
             top: 0.3rem;
+        }
+    }
+}
+
+// Move warning badge to the right in course header.
+.course-section-header {
+    position: relative;
+    .sectionbadges {
+        position: absolute;
+        right: 1rem;
+
+        .badge.badge-warning {
+            margin-left: 0;
         }
     }
 }
