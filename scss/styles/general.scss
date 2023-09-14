@@ -88,9 +88,16 @@ body {
 }
 
 // Link colour just for body copy.
-#page-content p {
-    color: $body-copy-color;
-    a {
-        color: $body-link-color;
+#page-content {
+    p, li {
+        color: $body-copy-color;
+        a {
+            color: $body-link-color;
+        }
     }
+}
+
+// Book activity font size.
+#page-mod-book-view .book_content {
+    font-size: 1.25em;
 }

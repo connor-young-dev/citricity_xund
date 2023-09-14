@@ -135,3 +135,11 @@
         margin-bottom: $spacer;
     }
 }
+
+// Starred courses.
+.block-starredcourses {
+    .dashboard-card-deck.one-row {
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+}

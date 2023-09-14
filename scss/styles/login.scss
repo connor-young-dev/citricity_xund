@@ -31,3 +31,31 @@
         height: 40px;
     }
 }
+
+// Login sign up page formating.
+#page-login-forgot_password [role="main"] {
+    padding: 2rem;
+    border: 0;
+    background-color: rgba(255, 255, 255, .9);
+    border: unset;
+    box-shadow: 0 0 11.5px 2px rgba(0, 0, 0, 0.25);
+    @include media-breakpoint-up(sm) {
+        flex: 0 0 66.6666666667%;
+        max-width: 66.6666666667%;
+        margin: auto;
+    }
+    @include media-breakpoint-up(xl) {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin: auto;
+    }
+
+    >div,
+    >form {
+        @include media-breakpoint-up(md) {
+            flex: 0 0 66.6666666667%;
+            max-width: 66.6666666667%;
+            margin: auto;
+        }
+    }
+}

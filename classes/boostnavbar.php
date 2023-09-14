@@ -50,6 +50,9 @@ class boostnavbar extends \theme_boost\boostnavbar {
         }
 
         if ($this->page->context->contextlevel == CONTEXT_COURSE) {
+            // Remove the course breadcrumb node.
+            $this->remove($this->page->course->id, \breadcrumb_navigation_node::TYPE_COURSE);
+
             // Add the categories breadcrumb navigation nodes.
             foreach (array_reverse($this->get_categories()) as $category) {
                 $context = \context_coursecat::instance($category->id);
@@ -75,9 +78,6 @@ class boostnavbar extends \theme_boost\boostnavbar {
         // Remove 'My courses' and 'Courses' if we are in the course context.
         $this->remove('mycourses');
         $this->remove('courses');
-
-        // Remove the course breadcrumb node.
-        $this->remove($this->page->course->id, \breadcrumb_navigation_node::TYPE_COURSE);
 
         // Remove the navbar nodes that already exist in the secondary navigation menu.
         $this->remove_items_that_exist_in_navigation($PAGE->secondarynav);
