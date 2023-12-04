@@ -38,3 +38,56 @@
 .que.ddwtos .group4 {
   background-color: #ACDADC;
 }
+
+// Kprime question type.
+.kprime {
+  .qtext {
+    font-size: 18px !important;
+    color: #000;
+  }
+
+  .generaltable {
+    font-size: 16px;
+    color: #000;
+
+    input[type="radio"], input[type="checkbox"] {
+      accent-color: #000;
+    }
+
+    .icon.fa-check-square {
+      color: $success;
+      margin-left: 5px;
+
+    }
+
+    .icon.fa-remove {
+      margin-left: 5px;
+    }
+
+    .kprimegreyingout {
+      opacity: 1;
+    }
+
+    tr,
+    td {
+      border-bottom: 1px solid $body-copy-color;
+      border-top: 0;
+    }
+
+    thead {
+      th,
+      td {
+        border-bottom: 0;
+        border-top: 0;
+      }
+    }
+
+    tr {
+      &:hover,
+      &:nth-of-type(odd) {
+        color: #000;
+        background-color: transparent;
+      }
+    }
+  }
+}
