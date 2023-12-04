@@ -51,10 +51,11 @@
 
   .generaltable {
     font-size:  $font-size-normal;
-    color: #000;
+    color: $body-copy-color;
 
-    input[type="radio"], input[type="checkbox"] {
-      accent-color: #000;
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: $body-copy-color;
     }
 
     .icon.fa-check-square {
@@ -88,7 +89,7 @@
     tr {
       &:hover,
       &:nth-of-type(odd) {
-        color: #000;
+        color: $body-copy-color;
         background-color: transparent;
       }
     }
