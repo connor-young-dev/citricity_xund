@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();                                                                                                
                                                                                                                                     
 // This is the version of the plugin.                                                                                               
-$plugin->version = '2023091400';
+$plugin->version = '2023120400';
 
 // This is the version of Moodle this plugin requires.                                                                              
 $plugin->requires = '2022041900'; // Moodle 4.0.                                                                                                 
@@ -13,7 +13,7 @@ $plugin->requires = '2022041900'; // Moodle 4.0.
 // for themes and should be the same as the name of the folder.                                                                     
 $plugin->component = 'theme_citricityxund';
 
-$plugin->release = 'v1.1.1';
+$plugin->release = 'v1.1.2';
                                                                                                                                     
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [                                                                                                           
