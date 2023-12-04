@@ -41,13 +41,16 @@
 
 // Kprime question type.
 .kprime {
+  $font-size-large: 18px;
+  $font-size-normal: 16px;
+
   .qtext {
-    font-size: 18px !important;
+    font-size: $font-size-large !important;
     color: #000;
   }
 
   .generaltable {
-    font-size: 16px;
+    font-size:  $font-size-normal;
     color: #000;
 
     input[type="radio"], input[type="checkbox"] {
