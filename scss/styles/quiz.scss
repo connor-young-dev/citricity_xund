@@ -35,6 +35,69 @@
   border-radius: 0 !important;
 }
 
-.que.ddwtos .group4 {
-  background-color: #ACDADC;
+.que.ddwtos {
+  .group4 {
+    background-color: #ACDADC;
+  }
+
+  .group1 {
+    background-color: #E8AAAE;
+  }
+}
+
+// Kprime question type.
+.kprime {
+  $font-size-large: 18px;
+  $font-size-normal: 16px;
+
+  .qtext {
+    font-size: $font-size-large !important;
+    color: #000;
+  }
+
+  .generaltable {
+    font-size:  $font-size-normal;
+    color: $body-copy-color;
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: $body-copy-color;
+    }
+
+    .icon.fa-check-square {
+      color: $success;
+      margin-left: 5px;
+
+    }
+
+    .icon.fa-remove {
+      margin-left: 5px;
+    }
+
+    .kprimegreyingout {
+      opacity: 1;
+    }
+
+    tr,
+    td {
+      border-bottom: 1px solid $body-copy-color;
+      border-top: 0;
+    }
+
+    thead {
+      th,
+      td {
+        border-bottom: 0;
+        border-top: 0;
+      }
+    }
+
+    tr {
+      &:hover,
+      &:nth-of-type(odd) {
+        color: $body-copy-color;
+        background-color: transparent;
+      }
+    }
+  }
 }
