@@ -36,9 +36,9 @@ const handleButtonClick = function (event) {
     courseSection.scrollIntoView({ behavior: 'smooth' });
 };
 
-// Only want to execute on topics view.
+// Only want to execute on topics view (excluding summary view).
 const expandTopics = () => {
-    if (document.getElementById('page-course-view-topics')) {
+    if (document.getElementById('page-course-view-topics') && !document.querySelectorAll('.section-summary').length > 0) {
         waitForElements();
     }
 };
