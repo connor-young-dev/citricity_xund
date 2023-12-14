@@ -125,6 +125,12 @@
     }
 }
 
+.courseindex .courseindex-item.dimmed {
+    &.pageitem .courseindex-link  {
+        color: $primary;
+    }
+}
+
 #page-course-view-topics {
 
     .section {
