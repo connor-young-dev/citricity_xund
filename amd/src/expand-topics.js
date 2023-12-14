@@ -40,8 +40,6 @@ const handleButtonClick = function (event) {
 const expandTopics = () => {
     if (document.getElementById('page-course-view-topics')) {
         waitForElements();
-    } else {
-        console.log('#page-course-view-topics is not in the body');
     }
 };
 
