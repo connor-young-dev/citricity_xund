@@ -1,45 +1,42 @@
-const waitForElements = () => {
-    const courseIndexButtons = document.querySelectorAll('.courseindex-section');
-
-    if (courseIndexButtons.length > 0) {
-        // Add listeners.
-        courseIndexButtons.forEach(function (button) {
-            button.addEventListener('click', handleButtonClick);
-        });
-    } else {
-        // Elements not loaded yet.
-        setTimeout(waitForElements, 250);
-    }
-};
-
 const handleButtonClick = function (event) {
     event.preventDefault();
 
-    // Extract the section id from the URL.
-    const url = this.href;
-    const sectionNumber = url.match(/#section-(\d+)/)[1];
+    const button = event.target.closest('.courseindex-section');
 
-    // Expand relevant section if needed.
-    const courseContentCollapse = document.getElementById(`coursecontentcollapse${sectionNumber}`);
-    const collapseSection = document.getElementById(`collapssesection${sectionNumber}`);
+    if (button) {
+        const url = button.href;
+        const sectionNumber = url.match(/#section-(\d+)/)[1];
 
-    if (courseContentCollapse && !courseContentCollapse.classList.contains('show')) {
-        courseContentCollapse.classList.add('show');
+        // Expand relevant section if needed.
+        const courseContentCollapse = document.getElementById(`coursecontentcollapse${sectionNumber}`);
+        const collapseSection = document.getElementById(`collapssesection${sectionNumber}`);
+
+        if (courseContentCollapse && !courseContentCollapse.classList.contains('show')) {
+            courseContentCollapse.classList.add('show');
+        }
+
+        if (collapseSection && collapseSection.classList.contains('collapsed')) {
+            collapseSection.classList.remove('collapsed');
+        }
+
+        // Go to section.
+        const courseSection = document.getElementById(`section-${sectionNumber}`);
+        courseSection.scrollIntoView({ behavior: 'smooth' });
     }
-
-    if (collapseSection && collapseSection.classList.contains('collapsed')) {
-        collapseSection.classList.remove('collapsed');
-    }
-
-    // Go to section.
-    const courseSection = document.getElementById(`section-${sectionNumber}`);
-    courseSection.scrollIntoView({ behavior: 'smooth' });
 };
 
-// Only want to execute on topics view (excluding summary view).
+const courseIndexEvent = () => {
+    const courseIndex = document.getElementById('courseindex-content');
+
+    if (courseIndex) {
+        courseIndex.addEventListener('click', handleButtonClick);
+    }
+};
+
+// Only want to execute on topics view.
 const expandTopics = () => {
     if (document.getElementById('page-course-view-topics') && !document.querySelectorAll('.section-summary').length > 0) {
-        waitForElements();
+        courseIndexEvent();
     }
 };
 
