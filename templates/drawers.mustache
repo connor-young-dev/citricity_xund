@@ -121,6 +121,10 @@
 </body>
 </html>
 {{#js}}
+require(['theme_citricityxund/expand-topics'], function(expandTopics) {
+    expandTopics.init();
+});
+
 M.util.js_pending('theme_boost/loader');
 require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
     Drawer.init();

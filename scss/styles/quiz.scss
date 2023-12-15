@@ -56,7 +56,7 @@
   }
 
   .generaltable {
-    font-size:  $font-size-normal;
+    font-size:  $font-size-normal !important;
     color: $body-copy-color;
 
     input[type="radio"],
@@ -100,4 +100,14 @@
       }
     }
   }
+}
+
+// Aggressive font-sizing for quiz.
+.que .content * {
+  font-size: 16px !important;
+}
+.que .content p[dir="ltr"] {
+  font-size: 16px !important;
+  direction: initial;
+  unicode-bidi: initial;
 }
