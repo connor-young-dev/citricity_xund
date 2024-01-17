@@ -280,3 +280,17 @@
         }
     }
 }
+
+.modtype_label {
+    .description {
+        p[dir="ltr"]:empty {
+            display: none;
+        }
+    }
+
+    .activity-basis {
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
+}
