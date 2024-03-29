@@ -102,22 +102,32 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
         // Remove 'My courses' if we are in the module context.
         if ($this->page->context->contextlevel == CONTEXT_MODULE) {
+            // Add the categories breadcrumb navigation nodes.
+            foreach ($this->get_categories() as $category) {
+                $context = \context_coursecat::instance($category->id);
+                if (!\core_course_category::can_view_category($category)) {
+                    continue;
+                }
+
+                $displaycontext = \context_helper::get_navigation_filter_context($context);
+                $url = new moodle_url('/course/index.php', ['categoryid' => $category->id]);
+                $name = format_string($category->name, true, ['context' => $displaycontext]);
+                $categorynode = \breadcrumb_navigation_node::create($name, $url, \breadcrumb_navigation_node::TYPE_CATEGORY,
+                    null, $category->id);
+                if (!$category->visible) {
+                    $categorynode->hidden = true;
+                }
+                array_unshift($this->items, $categorynode);
+            }
             $this->remove('mycourses');
             $this->remove('courses');
             // Remove the course category breadcrumb node.
-            $this->remove($this->page->course->category, \breadcrumb_navigation_node::TYPE_CATEGORY);
+            //$this->remove($this->page->course->category, \breadcrumb_navigation_node::TYPE_CATEGORY);
             $courseformat = course_get_format($this->page->course)->get_course();
             // Section items can be only removed if a course layout (coursedisplay) is not explicitly set in the
             // given course format or the set course layout is not 'One section per page'.
             $removesections = !isset($courseformat->coursedisplay) ||
                 $courseformat->coursedisplay != COURSE_DISPLAY_MULTIPAGE;
-            if ($removesections) {
-                // If the course sections are removed, we need to add the anchor of current section to the Course.
-                $coursenode = $this->get_item($this->page->course->id);
-                if (!is_null($coursenode) && $this->page->cm->sectionnum !== null) {
-                    $coursenode->action = course_get_format($this->page->course)->get_view_url($this->page->cm->sectionnum);
-                }
-            }
         }
 
         if ($this->page->context->contextlevel == CONTEXT_SYSTEM) {
