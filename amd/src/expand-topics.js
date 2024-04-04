@@ -1,6 +1,5 @@
 const handleButtonClick = function (event) {
     event.preventDefault();
-    console.log('executing');
 
     const button = event.target.closest('.courseindex-section');
 
@@ -24,10 +23,6 @@ const handleButtonClick = function (event) {
 
             if (collapseSection && collapseSection.classList.contains('collapsed')) {
                 collapseSection.classList.remove('collapsed');
-            }
-
-            if (!collapseSection) {
-                console.log('No section so go to the link');
             }
 
             // Go to section.
