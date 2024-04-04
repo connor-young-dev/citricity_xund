@@ -294,3 +294,8 @@
         z-index: 1;
     }
 }
+
+// Reduce padding between elements in topics format when not editing.
+#page-course-view-topics:not(.editing) .activity-item.activityinline {
+    padding: 0.25rem 0;
+}
