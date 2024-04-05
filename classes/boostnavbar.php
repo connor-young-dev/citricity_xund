@@ -102,7 +102,7 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
         // Remove 'My courses' if we are in the module context.
         if ($this->page->context->contextlevel == CONTEXT_MODULE) {
-            // TODO remove the below comment out if determined not needed.
+            // TODO investigate why categories only shown in certain course contexts by default.
             // Add the categories breadcrumb navigation nodes.
             foreach ($this->get_categories() as $category) {
                 $context = \context_coursecat::instance($category->id);
