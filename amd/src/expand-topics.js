@@ -5,23 +5,32 @@ const handleButtonClick = function (event) {
 
     if (button) {
         const url = button.href;
-        const sectionNumber = url.match(/#section-(\d+)/)[1];
+        const sectionMatch = url.match(/#section-(\d+)/);
+        let sectionNumber = null;
 
-        // Expand relevant section if needed.
-        const courseContentCollapse = document.getElementById(`coursecontentcollapse${sectionNumber}`);
-        const collapseSection = document.getElementById(`collapssesection${sectionNumber}`);
+        // Using hashbang so expand current page topic.
+        if (sectionMatch) {
+            sectionNumber = sectionMatch[1];
+            const courseSection = document.getElementById(`section-${sectionNumber}`);
 
-        if (courseContentCollapse && !courseContentCollapse.classList.contains('show')) {
-            courseContentCollapse.classList.add('show');
+            // Expand relevant section if needed.
+            const courseContentCollapse = document.getElementById(`coursecontentcollapse${sectionNumber}`);
+            const collapseSection = document.getElementById(`collapssesection${sectionNumber}`);
+
+            if (courseContentCollapse && !courseContentCollapse.classList.contains('show')) {
+                courseContentCollapse.classList.add('show');
+            }
+
+            if (collapseSection && collapseSection.classList.contains('collapsed')) {
+                collapseSection.classList.remove('collapsed');
+            }
+
+            // Go to section.
+            courseSection.scrollIntoView({behavior: 'smooth'});
+        } else {
+            // Go to the external section.
+            window.location.href = url;
         }
-
-        if (collapseSection && collapseSection.classList.contains('collapsed')) {
-            collapseSection.classList.remove('collapsed');
-        }
-
-        // Go to section.
-        const courseSection = document.getElementById(`section-${sectionNumber}`);
-        courseSection.scrollIntoView({ behavior: 'smooth' });
     }
 };
 
