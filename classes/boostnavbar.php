@@ -102,24 +102,38 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
         // Remove 'My courses' if we are in the module context.
         if ($this->page->context->contextlevel == CONTEXT_MODULE) {
-            // TODO remove the below comment out if determined not needed.
+            // TODO investigate why categories only shown in certain course contexts by default.
             // Add the categories breadcrumb navigation nodes.
-//            foreach ($this->get_categories() as $category) {
-//                $context = \context_coursecat::instance($category->id);
-//                if (!\core_course_category::can_view_category($category)) {
-//                    continue;
-//                }
-//
-//                $displaycontext = \context_helper::get_navigation_filter_context($context);
-//                $url = new moodle_url('/course/index.php', ['categoryid' => $category->id]);
-//                $name = format_string($category->name, true, ['context' => $displaycontext]);
-//                $categorynode = \breadcrumb_navigation_node::create($name, $url, \breadcrumb_navigation_node::TYPE_CATEGORY,
-//                    null, $category->id);
-//                if (!$category->visible) {
-//                    $categorynode->hidden = true;
-//                }
-//                array_unshift($this->items, $categorynode);
-//            }
+            foreach ($this->get_categories() as $category) {
+                $context = \context_coursecat::instance($category->id);
+                if (!\core_course_category::can_view_category($category)) {
+                    continue;
+                }
+
+                $displaycontext = \context_helper::get_navigation_filter_context($context);
+                $url = new moodle_url('/course/index.php', ['categoryid' => $category->id]);
+                $name = format_string($category->name, true, ['context' => $displaycontext]);
+                $categorynode = \breadcrumb_navigation_node::create($name, $url, \breadcrumb_navigation_node::TYPE_CATEGORY,
+                    null, $category->id);
+                if (!$category->visible) {
+                    $categorynode->hidden = true;
+                }
+
+                // Check if the category node already exists in the array.
+                $exists = false;
+                foreach ($this->items as $item) {
+                    if ($item->type == \breadcrumb_navigation_node::TYPE_CATEGORY && $item->key == $category->id) {
+                        $exists = true;
+                        break;
+                    }
+                }
+
+                // Add the category node only if it doesn't already exist.
+                if (!$exists) {
+                    array_unshift($this->items, $categorynode);
+                }
+            }
+
             $this->remove('mycourses');
             $this->remove('courses');
             // Remove the course category breadcrumb node.
