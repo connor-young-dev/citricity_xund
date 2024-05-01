@@ -80,6 +80,7 @@
 .courseindex-section:focus {
     margin-bottom: 3px;
     margin-top: 3px;
+    box-shadow: none !important;
 }
 .courseindex .courseindex-item,
 .courseindex .courseindex-item.dimmed {
@@ -203,6 +204,7 @@
         padding-top: 1rem;
         padding-bottom: 1rem;
         position: relative;
+        scroll-margin-top: 70px;
 
         .course-content-item-content {
             margin-top: 1rem !important;
