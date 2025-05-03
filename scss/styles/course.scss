@@ -2,7 +2,7 @@
     background-color: rgba($primary, .25);
     background-size: 40px;
     height: 60px;
-    @include media-breakpoint-up(md) {    
+    @include media-breakpoint-up(md) {
         height: 160px;
         background-size: 120px;
     }
@@ -45,7 +45,7 @@
     }
 
     // Move block region alongside heading for large devices.
-    @include media-breakpoint-up(xl) { 
+    @include media-breakpoint-up(xl) {
         #page-header>.col-12.pt-3 {
             max-width: calc(100% - 375px);
             padding-bottom: 0 !important;
@@ -300,4 +300,10 @@
 // Reduce padding between elements in topics format when not editing.
 #page-course-view-topics:not(.editing) .activity-item.activityinline {
     padding: 0.25rem 0;
+}
+
+.xund-course-card {
+    .card-img-top {
+        min-height: 120px;
+    }
 }
