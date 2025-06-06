@@ -78,9 +78,10 @@
 }
 
 // Dashboard card styling.
-.block-myoverview .card-grid {
+.block-myoverview .card-grid,
+.block-cards .card-carousel {
     gap: 12px;
-    .col {
+    &.card-grid .col, &.card-carousel .xund-course-card {
         &:nth-child(3n) {
             .dashboard-card-img {
                 background-color: rgba(#EB4F5A, .25);
@@ -122,6 +123,10 @@
             border-radius: 0.75rem;
         }
     }
+}
+
+.block-cards .card-carousel {
+    padding-bottom: 16px;
 }
 
 // Consistent width dashboard cards.
