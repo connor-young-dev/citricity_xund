@@ -84,7 +84,7 @@
     &.card-grid .col, &.card-carousel .xund-course-card {
         &:nth-child(3n) {
             .dashboard-card-img {
-                background-color: rgba(#EB4F5A, .25);
+                background-color: rgba($secondary, .25);
             }
         }
 
