@@ -80,27 +80,26 @@
 // Dashboard card styling.
 .block-myoverview .card-grid,
 .block-cards .card-carousel {
-    gap: 12px;
     &.card-grid .col, &.card-carousel .xund-course-card {
         &:nth-child(3n) {
-            .dashboard-card-img {
+            .card-img-top {
                 background-color: rgba($secondary, .25);
             }
         }
 
         &:nth-child(3n-1) {
-            .dashboard-card-img {
+            .card-img-top {
                 background-color: rgba($primary, .25);
             }
         }
 
         &:nth-child(3n-2) {
-            .dashboard-card-img {
+            .card-img-top {
                 background-color: rgba(#65c1be, .25);
             }
         }
     }
-    .dashboard-card {
+    .xund-course-card {
         border-radius: 0.75rem;
         border: 0;
         box-shadow: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.15);
@@ -110,7 +109,7 @@
             border-radius: 0.75rem;
         }
 
-        .dashboard-card-img {
+        .card-img-top {
             border-top-left-radius: 0.75rem;
             border-top-right-radius: 0.75rem;
             height: 8rem;
@@ -119,7 +118,7 @@
             background-repeat: no-repeat;
         }
 
-        .dashboard-card-footer {
+        .card-footer {
             border-radius: 0.75rem;
         }
     }
