@@ -331,3 +331,12 @@
 #page-course-view-topics:not(.editing) .activity-item.activityinline {
     padding: 0.25rem 0;
 }
+
+// Fix folder activity icon size
+.filemanager {
+    img.icon {
+        min-width: 32px;
+        min-height: 32px;
+        width: 32px;
+    }
+}
