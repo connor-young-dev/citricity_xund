@@ -78,42 +78,55 @@
 }
 
 // Dashboard card styling.
-.dashboard-card-deck .dashboard-card {
-    border-radius: 0.75rem;
-    border: 0;
-    box-shadow: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.15);
-    width: 300px;
+.block-myoverview .card-grid,
+.block-cards .card-carousel {
+    gap: 12px;
+    &.card-grid .col, &.card-carousel .xund-course-card {
+        &:nth-child(3n) {
+            .dashboard-card-img {
+                background-color: rgba($secondary, .25);
+            }
+        }
 
-    .dashboard-card-img {
-        border-top-left-radius: 0.75rem;
-        border-top-right-radius: 0.75rem;
-        height: 8rem;
-        background-position: center;
-        background-size: 85px;
-        background-repeat: no-repeat;
-    }
+        &:nth-child(3n-1) {
+            .dashboard-card-img {
+                background-color: rgba($primary, .25);
+            }
+        }
 
-    &:nth-child(3n) {
-        .dashboard-card-img {
-            background-color: rgba(#EB4F5A, .25);
+        &:nth-child(3n-2) {
+            .dashboard-card-img {
+                background-color: rgba(#65c1be, .25);
+            }
         }
     }
-
-    &:nth-child(3n-1) {
-        .dashboard-card-img {
-            background-color: rgba($primary, .25);
-        }
-    }
-
-    &:nth-child(3n-2) {
-        .dashboard-card-img {
-            background-color: rgba(#65c1be, .25);
-        }
-    }
-
-    .dashboard-card-footer {
+    .dashboard-card {
         border-radius: 0.75rem;
+        border: 0;
+        box-shadow: 1.5px 1.5px 3px 0 rgba(0, 0, 0, 0.15);
+        width: 300px;
+
+        .card-footer {
+            border-radius: 0.75rem;
+        }
+
+        .dashboard-card-img {
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            height: 8rem;
+            background-position: center;
+            background-size: 85px;
+            background-repeat: no-repeat;
+        }
+
+        .dashboard-card-footer {
+            border-radius: 0.75rem;
+        }
     }
+}
+
+.block-cards .card-carousel {
+    padding-bottom: 16px;
 }
 
 // Consistent width dashboard cards.

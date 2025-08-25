@@ -28,6 +28,7 @@
 
 
 /* @import must be at top of file, otherwise CSS will not work */
+/* !!! NOTE - this is why this is in .css and not a .scss file */
 @import url("//hello.myfonts.net/count/482d38");
 
 @font-face {

@@ -27,7 +27,7 @@ body {
 @include bg-variant(".bg-gray", $gray-200, true);
 
 // Stop radius defaulting to zero.
-.btn { 
+.btn {
     border-radius: $btn-border-radius;
 }
 
@@ -56,7 +56,7 @@ body {
     }
 }
 
-// Link and categories use suitable colour variables. 
+// Link and categories use suitable colour variables.
 .block .block-cards .btn-link {
     color: $link-color;
 }
@@ -87,11 +87,13 @@ body {
     background-color: #fff;
 }
 
-// Link colour just for body copy.
-#page-content {
+// Colors for body and tiny mce.
+#page-content,
+.mce-content-body {
     p, li {
         color: $body-copy-color;
         a {
+            // Note: Link colour just for body copy and tiny mce.
             color: $body-link-color;
         }
     }
@@ -100,4 +102,23 @@ body {
 // Book activity font size.
 #page-mod-book-view .book_content {
     font-size: 1.25em;
+}
+#tinymce.id_page-mod-book-edit {
+    // Note - this makes the editor use the same font size
+    // as 1.25em.
+    // Since tiny mce editor is a root element of a separate dom document,
+    // em's will be wrong since the same parent elements are missing.
+    font-size: 18.75px;
+}
+
+// Tiny mce.
+.mce-content-body {
+    padding: 0.5rem;
+    // Do not change the root font size if the viewport size changes.
+    // We are in an editor!
+    @media (max-width: 1200px) {
+        body {
+            font-size: .9375rem ;
+        }
+    }
 }
