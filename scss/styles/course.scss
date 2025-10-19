@@ -181,10 +181,6 @@
         width: $activity-containericon-width;
         height: $activity-containericon-height;
 
-        img {
-            filter: brightness(0) invert(1);
-        }
-
         &.smaller {
             width: $activity-containericon-width - 10px;
             height: $activity-containericon-height - 10px;
@@ -193,8 +189,13 @@
         }
 
         @each $name, $color in $activity-icon-colors {
-            &.#{$name} {
-                background-color: $color;
+            &:not(.isbranded):not(.modicon_hvp) {
+                &.#{$name} {
+                    background-color: $color;
+                }
+                img:not(.nofilter) {
+                    filter: brightness(0) invert(1);
+                }
             }
         }
     }
