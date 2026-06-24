@@ -277,7 +277,8 @@
 .activity-item.hiddenactivity .activityiconcontainer,
 .activity-item.hiddenactivity .badge,
 .course-section-header .badge {
-    &.badge-warning {
+    &.badge-warning,
+    &.bg-warning {
         background-color: rgba(235,79,90,.5);
         color: #fff;
         border-radius: 4px;
@@ -308,7 +309,8 @@
         position: absolute;
         right: 1rem;
 
-        .badge.badge-warning {
+        .badge.badge-warning,
+        .badge.bg-warning {
             margin-left: 0;
         }
     }

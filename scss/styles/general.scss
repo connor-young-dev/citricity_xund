@@ -24,7 +24,9 @@ body {
     @include button-outline-variant($warning-outline);
 }
 
-@include bg-variant(".bg-gray", $gray-200, true);
+.bg-gray {
+    background-color: $gray-200 !important;
+}
 
 // Stop radius defaulting to zero.
 .btn {
@@ -70,21 +72,29 @@ body {
     color: #fff;
 }
 
-// Edit button.
+// Edit button toggle (Bootstrap 5) and legacy fallback selectors.
+.form-check-input,
 .custom-control-label::before {
     background-color: #fff;
 }
+
+.form-switch .form-check-input,
 .custom-switch .custom-control-label::after {
     background-color: $secondary;
+    border-color: $secondary;
 }
 
+.form-check-input:checked,
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
     border-color: $secondary;
     background-color: $secondary;
 }
+
+.form-switch .form-check-input:checked,
 .custom-switch .custom-control-input:checked~.custom-control-label::after {
     background-color: #fff;
+    border-color: #fff;
 }
 
 // Colors for body and tiny mce.

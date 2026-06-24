@@ -40,13 +40,14 @@ $table-accent-bg:             rgba($black, .03) !default;
 
 // Options
 $enable-rounded: false !default;
-$enable-responsive-font-sizes: true !default;
+$enable-rfs: true !default;
 
 // Body
 $body-color: $primary !default;
 $body-copy-color: #000 !default;
 $headings-color: $primary !default;
-$body-link-color: $secondary !default;
+$link-color: $secondary !default;
+$body-link-color: $link-color !default;
 $course-content-maxwidth: 100% !default;
 
 // Fonts
@@ -88,8 +89,8 @@ $toast-background-color:            rgba($gray-900, .95) !default;
 $toast-header-color:                $gray-100 !default;
 $toast-header-background-color:     rgba($white, .1) !default;
 
-// Custom control size
-$custom-control-indicator-size: 1.25rem;
+// Bootstrap 5 form check size; use em to match Bootstrap math in _variables.scss.
+$form-check-input-width: 1.25em;
 
 $input-bg: rgba($primary, 0.15) !default;
 

@@ -7,6 +7,7 @@ function theme_citricityxund_get_main_scss_content($theme) {
     global $CFG;
 
     $scss = [];
+
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
     $scss[] = file_get_contents($CFG->dirroot . '/theme/citricityxund/scss/pre.scss');
 

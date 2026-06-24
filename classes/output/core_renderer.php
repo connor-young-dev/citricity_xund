@@ -7,6 +7,7 @@ use core_auth\output\login;
 use core_course_list_element;
 use stdClass;
 use html_writer;
+use moodle_url;
 
 class core_renderer extends \theme_boost\output\core_renderer {
     /**
@@ -54,7 +55,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $context = context_course::instance($course->id);
         foreach ($course->get_course_overviewfiles() as $file) {
             if ($isimage = $file->is_valid_image()) {
-                $courseimage = file_encode_url("$CFG->wwwroot/pluginfile.php", '/' . $file->get_contextid() . '/' . $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
+                $courseimage = new moodle_url("$CFG->wwwroot/pluginfile.php". '/' . $file->get_contextid() . '/' . $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename())->out(false);
             }
         }
         return $courseimage;
@@ -138,7 +139,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Image data.
         if (isset($contextheader->imagedata)) {
             // Header specific image.
-            $html .= html_writer::div($contextheader->imagedata, 'page-header-image mr-2');
+            $html .= html_writer::div($contextheader->imagedata, 'page-header-image me-2');
         }
 
         // Headings.
