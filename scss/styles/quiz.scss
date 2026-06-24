@@ -1,5 +1,7 @@
 .que .formulation {
-  @include alert-variant(#F8F9FC, #F8F9FC, $body-copy-color);
+  background-color: #F8F9FC;
+  border-color: #F8F9FC;
+  color: $body-copy-color;
   min-height: 250px;
 }
 

@@ -1,11 +1,11 @@
 <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex" aria-label="{{#str}}sitemenubar, admin{{/str}}">
 
-        <div data-region="drawer-toggle" class="d-inline-block mr-3 my-auto">
-            <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn btn-link nav-link float-sm-left p-0 nav-drawer-button" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
+        <div data-region="drawer-toggle" class="d-inline-block me-3 my-auto">
+            <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn btn-link nav-link float-sm-start p-0 nav-drawer-button" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="visually-hidden">{{#str}}sidepanel, core{{/str}}</span></button>
         </div>
 
-         <a href="{{{ config.wwwroot }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 mr-3 p-0 aabtn">
-            <img src="{{logo}}" class="logo mr-1" alt="{{sitename}}">
+         <a href="{{{ config.wwwroot }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 me-3 p-0 aabtn">
+            <img src="{{logo}}" class="logo me-1" alt="{{sitename}}">
         </a>
 
         {{#primarymoremenu}}
@@ -19,7 +19,7 @@
             {{{ output.page_heading_menu }}}
         </ul>
 
-        <div id="usernavigation" class="navbar-nav ml-auto">
+        <div id="usernavigation" class="navbar-nav ms-auto">
             {{# output.search_box }}
                 {{{ output.search_box }}}
                 <div class="divider border-left h-75 align-self-center mx-1"></div>
