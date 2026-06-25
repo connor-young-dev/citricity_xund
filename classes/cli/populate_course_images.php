@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,36 +12,54 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace theme_citricityxund\cli;
 
 use stdClass;
 
 /**
- * Cli routine to populate course images.
+ * Routine to populate courses with category-based overview images.
  *
  * @package   theme_citricityxund
  * @author    Guy Thomas
  * @copyright 2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class populate_course_images {
-    private $defaultimages = []; // A flat array of all the default image names.
+    /** @var string[] A flat array of all the default image names. */
+    private $defaultimages = [];
+
+    /** @var array Image file paths keyed by category idnumber, then by filename. */
     private $catimagesbycatidnumber = [];
-    private $catimagecounts = []; // This is used to work out the least used image within a category.
-    // Category idnumbers hashed by id - note: carries the idnumber down to sub categories that don't have idnumbers.
+
+    /** @var array Image usage counts keyed by category idnumber then filename (to find the least-used image). */
+    private $catimagecounts = [];
+
+    /** @var array Category idnumbers keyed by category id (inherited down to sub-categories without their own idnumber). */
     private $catidnumbersbyid = [];
+
+    /** @var string|null Absolute path to the directory holding the per-category image folders. */
     private $imgdir = null;
 
+    /**
+     * Constructor.
+     *
+     * @param string|null $imgdir Path to the category images directory (defaults to the theme assets folder).
+     * @param bool $reset Whether to wipe all existing course overview images first.
+     */
     private function __construct($imgdir = null, $reset = false) {
         global $CFG;
 
-        $this->imgdir = $imgdir ?? $CFG->dirroot.'/theme/citricityxund/assets/categoryimages';
+        $this->imgdir = $imgdir ?? $CFG->dirroot . '/theme/citricityxund/assets/categoryimages';
         $this->init($reset);
     }
 
+    /**
+     * Build the internal lookups (and optionally wipe existing course images first).
+     *
+     * @param bool $reset Whether to wipe all existing course overview images first.
+     */
     private function init($reset = false): void {
         if ($reset) {
             $this->wipe_out_all_course_images();
@@ -51,6 +69,9 @@ class populate_course_images {
         $this->set_category_course_image_counts();
     }
 
+    /**
+     * Delete the overview image files from every course.
+     */
     private function wipe_out_all_course_images(): void {
         $courses = get_courses();
         foreach ($courses as $course) {
@@ -60,16 +81,24 @@ class populate_course_images {
         }
     }
 
+    /**
+     * Build an instance pointing at the test fixtures (PHPUnit only).
+     *
+     * @return populate_course_images
+     */
     public static function get_test_instance(): populate_course_images {
         global $CFG;
 
         if (!PHPUNIT_TEST) {
             throw new \coding_exception('You may only use this method from within a php unit test');
         }
-        $imgdir = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages';
+        $imgdir = $CFG->dirroot . '/theme/citricityxund/tests/fixtures/categoryimages';
         return new populate_course_images($imgdir);
     }
 
+    /**
+     * Build the map of available category images from the asset folders (one folder per category idnumber).
+     */
     private function set_catimagesbycatidnumber(): void {
         $dir = new \DirectoryIterator($this->imgdir);
         foreach ($dir as $fileinfo) {
@@ -82,7 +111,7 @@ class populate_course_images {
 
             // This is the folder name that should correspond to the category idnumber.
             $catidnumber = $fileinfo->getFilename();
-            $catdir = new \DirectoryIterator($fileinfo->getPath().'/'.$catidnumber);
+            $catdir = new \DirectoryIterator($fileinfo->getPath() . '/' . $catidnumber);
             foreach ($catdir as $imagefileinfo) {
                 if ($imagefileinfo->isDot()) {
                     continue;
@@ -101,12 +130,19 @@ class populate_course_images {
                 $this->defaultimages[] = $imagefileinfo->getFilename();
 
                 $this->catimagesbycatidnumber[$catidnumber][$imagefileinfo->getFilename()] =
-                    $imagefileinfo->getPath().'/'.$imagefileinfo->getFilename();
+                    $imagefileinfo->getPath() . '/' . $imagefileinfo->getFilename();
             }
         }
     }
 
-    private function get_ancestor_with_idnumber(stdClass $catrow, array $catsbypath) :?stdClass {
+    /**
+     * Find the nearest ancestor category that has an idnumber.
+     *
+     * @param stdClass $catrow The category record (with a path).
+     * @param array $catsbypath Category records keyed by their path.
+     * @return stdClass|null The nearest ancestor with an idnumber, or null if none.
+     */
+    private function get_ancestor_with_idnumber(stdClass $catrow, array $catsbypath): ?stdClass {
         $parts = explode('/', $catrow->path);
         array_pop($parts);
         $parentpath = implode('/', $parts);
@@ -127,7 +163,7 @@ class populate_course_images {
     private function set_catidnumbersbyid(): void {
         global $DB;
         $sql = "SELECT id, parent, idnumber, path
-                FROM {course_categories} 
+                FROM {course_categories}
                 ORDER BY sortorder";
         $catidnumbers = [];
         $catsbypath = [];
@@ -150,6 +186,12 @@ class populate_course_images {
         $this->catidnumbersbyid = $catidnumbers;
     }
 
+    /**
+     * Return the course's overview image file, if it has a valid one.
+     *
+     * @param int $courseid The course id.
+     * @return \stored_file|null The overview image file, or null if none.
+     */
     private function get_course_image(int $courseid): ?\stored_file {
         $context = \context_course::instance($courseid);
         $fs = get_file_storage();
@@ -170,6 +212,12 @@ class populate_course_images {
         return null;
     }
 
+    /**
+     * Store an overview image on a course from a file on disk.
+     *
+     * @param int $courseid The course id.
+     * @param string $filepath Absolute path to the source image file.
+     */
     private function set_course_image_from_filepath(int $courseid, string $filepath): void {
         $context = \context_course::instance($courseid);
         $fs = get_file_storage();
@@ -185,6 +233,12 @@ class populate_course_images {
         $fs->create_file_from_pathname($filerecord, $filepath);
     }
 
+    /**
+     * Fetch a category record by idnumber (statically cached).
+     *
+     * @param string $idnumber The category idnumber.
+     * @return stdClass|null The category record, or null if not found.
+     */
     private function get_course_category_by_idnumber(string $idnumber): ?stdClass {
         global $DB;
 
@@ -196,7 +250,7 @@ class populate_course_images {
         }
         $categories = $DB->get_records('course_categories', ['idnumber' => $idnumber]);
         if (count($categories) > 1) {
-            throw new \coding_exception('Attempt to get category by idnumber "'.$idnumber.'" returned more than one category');
+            throw new \coding_exception('Attempt to get category by idnumber "' . $idnumber . '" returned more than one category');
         }
         $category = count($categories) === 1 ? reset($categories) : null;
         $categories[$idnumber] = $category;
@@ -204,6 +258,12 @@ class populate_course_images {
         return $categories[$idnumber];
     }
 
+    /**
+     * Fetch a category record by id (statically cached).
+     *
+     * @param int $categoryid The category id.
+     * @return stdClass|null The category record, or null if not found.
+     */
     private function get_course_category(int $categoryid): ?stdClass {
         global $DB;
 
@@ -222,6 +282,11 @@ class populate_course_images {
         return $categories[$categoryid];
     }
 
+    /**
+     * Print a section title to the CLI trace output.
+     *
+     * @param string $title The title to print.
+     */
     private function trace_section_title(string $title): void {
         mtrace("\n");
         mtrace(str_repeat('-', 30));
@@ -229,6 +294,9 @@ class populate_course_images {
         mtrace(str_repeat('-', 30));
     }
 
+    /**
+     * Count how many times each category image is currently used across courses.
+     */
     private function set_category_course_image_counts(): void {
         $catimgcounts = []; // Image filename counts hashed by categories / image name.
         $courses = get_courses();
@@ -251,7 +319,7 @@ class populate_course_images {
         }
 
         foreach ($courses as $course) {
-            $c ++;
+            $c++;
             mtrace("Checking course image $c of $coursecount ($course->shortname)");
             if ($course->id === SITEID) {
                 mtrace("Skipping site course");
@@ -295,12 +363,18 @@ class populate_course_images {
         $this->catimagecounts = $catimgcounts;
     }
 
+    /**
+     * Return the least-used image filename for a category idnumber.
+     *
+     * @param string $idnumber The category idnumber.
+     * @return string|null The least-used image filename, or null if the category has no images.
+     */
     private function get_least_used_image_for_categoryidnumber(string $idnumber): ?string {
         $lowestcount = 0;
         $leastusedimg = null;
         if (!isset($this->catimagecounts[$idnumber])) {
             $category = $this->get_course_category_by_idnumber($idnumber);
-            mtrace('Invalid category: '.$category->name);
+            mtrace('Invalid category: ' . $category->name);
             return null;
         }
 
@@ -313,6 +387,9 @@ class populate_course_images {
         return $leastusedimg;
     }
 
+    /**
+     * Assign the least-used category image to each course that lacks an overview image.
+     */
     private function process_courses() {
         $courses = get_courses();
         $c = 0;
@@ -357,6 +434,9 @@ class populate_course_images {
         }
     }
 
+    /**
+     * Entry point: populate overview images across all courses on the site.
+     */
     public static function do() {
         static $me = null;
         if (!$me) {

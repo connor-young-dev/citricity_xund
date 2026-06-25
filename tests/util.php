@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,12 +12,12 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Citricity xund testing utilities.
+ * Citricity XUND testing utilities.
  *
- * @package    theme_citricitxund
+ * @package    theme_citricityxund
  * @author     Guy Thomas
  * @copyright  2022 Citricity Ltd <http://citr.city> / FFHS MediaFactory
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,9 +25,17 @@
 
 namespace theme_citricityxund;
 
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Testing utilities for the Citricity XUND theme.
+ */
 class util {
+    /**
+     * Read the value of a restricted (non-public) property from an object via reflection.
+     *
+     * @param object $object The object to read from.
+     * @param string $property The property name.
+     * @return mixed The property value.
+     */
     public static function get_restricted_property_value($object, string $property) {
         $reflect = new \ReflectionClass($object);
         $prop = $reflect->getProperty($property);
