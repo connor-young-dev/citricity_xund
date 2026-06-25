@@ -19,7 +19,18 @@
                 </div>
             {{/error}}
 
+            {{#maintenance}}
+                <div class="alert alert-danger login-maintenance">
+                    {{{maintenance}}}
+                </div>
+            {{/maintenance}}
+
+            {{#info}}
+                <div class="alert alert-info" id="logininfomessage" role="status">{{info}}</div>
+            {{/info}}
+
             <div class="row justify-content-md-center loginform">
+                {{#showloginform}}
                 <div class="col-12 col-md-8">
                     <form class="mt-3" action="{{loginurl}}" method="post" id="login">
                         <input id="anchor" type="hidden" name="anchor" value="">
@@ -47,9 +58,16 @@
                                 placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}}>
                         </div>
 
+                        {{#recaptcha}}
+                            <div class="login-form-recaptcha mb-3">
+                                {{{recaptcha}}}
+                            </div>
+                        {{/recaptcha}}
+
                         <button type="submit" class="btn btn-primary w-100 mt-3" id="loginbtn">{{#str}}login{{/str}}</button>
                     </form>
                 </div>
+                {{/showloginform}}
 
                 <div class="col-12 col-md-8">
                     <div class="forgetpass mt-3">

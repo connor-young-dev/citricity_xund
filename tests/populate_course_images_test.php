@@ -19,8 +19,6 @@
  *
  * @package    theme_citricityxund
  * @category   test
- * @group      wip
- * @group      theme_citricityxund
  * @copyright  2022 Guy Thomas dev@citri.city
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,8 +26,10 @@ namespace theme_citricityxund;
 
 defined('MOODLE_INTERNAL') || die();
 
-require(__DIR__.'/util.php');
+require(__DIR__ . '/util.php');
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use theme_citricityxund\cli\populate_course_images;
 use theme_citricityxund\util;
 
@@ -38,14 +38,13 @@ use theme_citricityxund\util;
  *
  * @package    theme_citricityxund
  * @category   test
- * @group      wip
- * @group      theme_citricityxund
  * @copyright  2022 Guy Thomas dev@citri.city
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class populate_course_images_test extends \advanced_testcase {
-
-    public function test_set_catimagesbycatidnumber() {
+#[CoversClass(populate_course_images::class)]
+#[Group('theme_citricityxund')]
+final class populate_course_images_test extends \advanced_testcase {
+    public function test_set_catimagesbycatidnumber(): void {
         ob_start();
         $instance = \theme_citricityxund\cli\populate_course_images::get_test_instance();
         \phpunit_util::call_internal_method($instance, 'set_catimagesbycatidnumber', [], get_class($instance));
@@ -56,7 +55,7 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEquals(3, count($catimages[5]));
     }
 
-    public function test_set_catidnumbersbyid_no_idnumbers() {
+    public function test_set_catidnumbersbyid_no_idnumbers(): void {
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
         $dg->create_category();
@@ -69,7 +68,7 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEmpty($catidnumbersbyid);
     }
 
-    public function test_set_catidnumbersbyid_with_idnumbers() {
+    public function test_set_catidnumbersbyid_with_idnumbers(): void {
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
         $cat1 = $dg->create_category(['idnumber' => 'cat1']);
@@ -87,7 +86,7 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertNotEmpty($catidnumbersbyid[$cat2->id]);
     }
 
-    public function test_set_catidnumbersbyid_with_idnumbers_subcategories() {
+    public function test_set_catidnumbersbyid_with_idnumbers_subcategories(): void {
         $this->resetAfterTest();
         $dg = $this->getDataGenerator();
         $cat1 = $dg->create_category(['idnumber' => 'cat1']);
@@ -130,10 +129,11 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEquals($subcat23->idnumber, $catidnumbersbyid[$subcat231->id]);
     }
 
-    public function test_set_category_course_image_counts() {
+    public function test_set_category_course_image_counts(): void {
         global $CFG;
 
         $this->resetAfterTest();
+        $this->setAdminUser();
 
         // Check without courses returns 0 for each categoryid.
         // Note - set_category_course_image_counts is called on instantiation.
@@ -168,7 +168,7 @@ class populate_course_images_test extends \advanced_testcase {
 
         // Check with courses + images in categories.
         $course5n1 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
+        $filepath = $CFG->dirroot . '/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
         $this->set_course_image_from_filepath($instance, $course5n1->id, $filepath);
 
         // Reinitialize (calls set_category_course_image_counts).
@@ -178,13 +178,13 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_2.png']);
         $this->assertEquals(0, $imagecounts[5]['Xund_Icon_Wegweiser_3.png']);
         $course5n2 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_2.png';
+        $filepath = $CFG->dirroot . '/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_2.png';
         $this->set_course_image_from_filepath($instance, $course5n2->id, $filepath);
         $course5n3 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_3.png';
+        $filepath = $CFG->dirroot . '/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_3.png';
         $this->set_course_image_from_filepath($instance, $course5n3->id, $filepath);
         $course5n4 = $dg->create_course(['category' => $catidnumber5->id]);
-        $filepath = $CFG->dirroot.'/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
+        $filepath = $CFG->dirroot . '/theme/citricityxund/tests/fixtures/categoryimages/5/Xund_Icon_Wegweiser_1.png';
         $this->set_course_image_from_filepath($instance, $course5n4->id, $filepath);
 
         // Reinitialize (calls set_category_course_image_counts).
@@ -198,13 +198,37 @@ class populate_course_images_test extends \advanced_testcase {
         $this->assertEquals('Xund_Icon_Wegweiser_2.png', $leastused);
     }
 
-    private function set_course_image_from_filepath(populate_course_images $instance, int $courseid, string $filepath) {
-        \phpunit_util::call_internal_method($instance, 'set_course_image_from_filepath',
-            [$courseid, $filepath], get_class($instance));
+    /**
+     * Set a course's overview image from a file on disk (test helper).
+     *
+     * @param populate_course_images $instance The CLI instance under test.
+     * @param int $courseid The course id.
+     * @param string $filepath Absolute path to the image file.
+     */
+    private function set_course_image_from_filepath(populate_course_images $instance, int $courseid, string $filepath): void {
+        \phpunit_util::call_internal_method(
+            $instance,
+            'set_course_image_from_filepath',
+            [$courseid, $filepath],
+            get_class($instance)
+        );
     }
 
-    private function call_private_method(populate_course_images $instance, string $method, array $params = [],
-        $silent = true) {
+    /**
+     * Invoke a private/protected method on the CLI instance (test helper).
+     *
+     * @param populate_course_images $instance The CLI instance under test.
+     * @param string $method The method name to invoke.
+     * @param array $params Parameters to pass to the method.
+     * @param bool $silent Whether to suppress captured CLI output.
+     * @return array [captured output, method return value].
+     */
+    private function call_private_method(
+        populate_course_images $instance,
+        string $method,
+        array $params = [],
+        $silent = true
+    ) {
         ob_start();
         $methodresult = \phpunit_util::call_internal_method($instance, $method, $params, get_class($instance));
         $clioutput = ob_get_clean();
