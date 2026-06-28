@@ -1,0 +1,39 @@
+This file describes API changes in the citricityxund theme.
+Information provided here is intended especially for developers.
+
+=== v2.0.0 ===
+
+Upgraded for Moodle 5.2 (from 4.5). Minimum supported version is now Moodle 5.2.
+
+* $plugin->requires raised to 2026042000 (Moodle 5.2); theme_boost dependency raised to 2026042000.
+* classes/output/core_renderer.php now uses the namespaced output API introduced in Moodle 5.0:
+  - \html_writer  -> \core\output\html_writer
+  - \moodle_url   -> \core\url
+  - \context_course -> \core\context\course
+  The legacy global class names remain available as back-compat aliases but should not be relied upon.
+* The render_context_header() renderer override has been removed. It overrode a method deprecated in
+  Moodle 4.5; the theme now inherits core's core/context_header.mustache template. The theme's
+  .page-context-header SCSS padding is unchanged. (Message/contact button JS is loaded by core.)
+* amd/src/expand-topics.js updated for the Moodle 5.x course index: the section collapse elements are
+  now keyed by section id (#coursecontentcollapseid{id}, #collapsesectionid{id}) instead of section
+  number. The section id is read from the course-index node's data-id attribute. AMD rebuilt.
+* templates/block_myoverview/main.mustache: Bootstrap 4 ".no-gutters" replaced with ".g-0" (Bootstrap 5).
+* templates/navbar.mustache: Bootstrap 4 ".border-left" replaced with ".border-start" (Bootstrap 5, RTL-aware).
+* templates/core/loginform.mustache: added the {{#maintenance}}, {{#info}} and {{#recaptcha}} conditional
+  blocks so login still renders correctly when maintenance messages, info notices, or reCAPTCHA are enabled
+  (they output nothing when those features are inactive). The username/password form is now wrapped in
+  {{#showloginform}} so it is hidden on OAuth2/SSO-only sites (matching core), while identity providers
+  remain visible.
+* templates/core_courseformat/local/courseindex/section.mustache: fixed two Moodle 5.x course-index issues:
+  the section element id no longer carries the {{uniqid}} prefix and component.init() is now passed a valid
+  CSS selector ('#course-index-section-{{id}}') instead of a bare, digit-leading id (core's section JS calls
+  querySelector on it); and the dangling aria-owns (which pointed at a non-existent group and made core's
+  tree.js throw on click) has been removed so each section is a valid leaf treeitem.
+* classes/output/core_renderer.php: get_course_header_image_url() now builds the course image URL with
+  \core\url::make_pluginfile_url() instead of hand-concatenating the pluginfile path (honours
+  $CFG->slasharguments and itemid handling correctly).
+* Added a privacy provider (classes/privacy/provider.php implementing null_provider) — the theme stores
+  no personal data.
+* The codebase has been brought up to the Moodle coding standard (phpcs --standard=moodle is clean):
+  file/class/function PHPDoc added, language strings ordered, and the PHPUnit test modernised to use
+  attributes (#[CoversClass], #[Group]) instead of doc-comment metadata.

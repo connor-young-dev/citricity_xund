@@ -98,12 +98,13 @@ const handleButtonClick = function (event) {
     if (sectionNumber) {
       const courseSection = document.getElementById(`section-${sectionNumber}`);
       if (courseSection) {
-        // Expand relevant section if needed.
+        // Expand the relevant section if needed.
+        const sectionId = button.dataset.id;
         const courseContentCollapse = document.getElementById(
-          `coursecontentcollapse${sectionNumber}`
+          `coursecontentcollapseid${sectionId}`
         );
         const collapseSection = document.getElementById(
-          `collapssesection${sectionNumber}`
+          `collapsesectionid${sectionId}`
         );
 
         if (
@@ -118,6 +119,7 @@ const handleButtonClick = function (event) {
           collapseSection.classList.contains("collapsed")
         ) {
           collapseSection.classList.remove("collapsed");
+          collapseSection.setAttribute("aria-expanded", "true");
         }
 
         // Go to section.
