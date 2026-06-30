@@ -1,0 +1,33 @@
+{{!
+    Theme override of core_courseformat/local/content/section/cmsummary.
+
+    Shows the per-activity-type breakdown (e.g. "Text and media areas 9 · File 1
+    · Page 1") in the section summary instead of the plain "Activities: N" count,
+    matching the customer's Moodle 4.x layout. The core class already exports the
+    `mods` array (each with a name + count); the " · " separators between types
+    are added in SCSS (.section-summary-activities .cmsummary-type + ::before).
+
+    Example context (json):
+    {
+        "showcompletion": true,
+        "mods": [
+            { "name": "Text and media areas", "count": "9" },
+            { "name": "File", "count": "1" },
+            { "name": "Page", "count": "1" }
+        ],
+        "modprogress": "Progress: 1 / 5",
+        "totalactivities": "11"
+    }
+}}
+<div class="section-summary-activities d-flex">
+    <div class="activity-count d-flex align-items-center flex-wrap">
+        {{#pix}}i/activities, moodle{{/pix}}
+        {{#mods}}<span class="cmsummary-type">{{name}} {{count}}</span>{{/mods}}
+        {{^mods}}{{#str}} totalactivities, course, {{totalactivities}} {{/str}}{{/mods}}
+    </div>
+    {{#showcompletion}}
+        <div class="d-flex ms-auto align-items-center">
+            {{#pix}}i/stats, moodle{{/pix}}{{modprogress}}
+        </div>
+    {{/showcompletion}}
+</div>

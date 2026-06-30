@@ -42,12 +42,15 @@ $table-accent-bg:             rgba($black, .03) !default;
 $enable-rounded: false !default;
 $enable-rfs: true !default;
 
+$min-contrast-ratio: 3 !default;
+
 // Body
 $body-color: $primary !default;
 $body-copy-color: #000 !default;
 $headings-color: $primary !default;
-$link-color: $secondary !default;
-$body-link-color: $link-color !default;
+$text-muted: $gray-600 !default;
+$link-color: $primary !default;
+$body-link-color: $secondary !default;
 $course-content-maxwidth: 100% !default;
 
 // Fonts

@@ -68,33 +68,75 @@ body {
 
 // Drawer toggles.
 .drawer-toggles .drawer-toggler .btn {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 16px;
+    border-radius: 200px;
     background-color: $secondary;
     color: #fff;
+    box-shadow: $box-shadow-sm;
+    transition: padding 200ms;
+
+    .icon {
+        width: auto;
+        height: auto;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: $secondary;
+        color: #fff;
+    }
 }
 
-// Edit button toggle (Bootstrap 5) and legacy fallback selectors.
-.form-check-input,
-.custom-control-label::before {
+// Left toggle (course index): flat against the left edge, grows leftward on hover.
+.drawer-toggles .drawer-left-toggle .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: 14px;
+    padding-left: 10px;
+
+    &:hover {
+        padding-left: 20px;
+    }
+}
+
+// Right toggle (block drawer): flat against the right edge, grows rightward on hover.
+.drawer-toggles .drawer-right-toggle .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 10px;
+    padding-left: 14px;
+
+    &:hover {
+        padding-right: 20px;
+    }
+}
+
+.form-switch .form-check-input {
+    width: 1.75rem;
+    height: 1rem;
+    margin-top: 0.25rem;
+    border-radius: 2rem;
+}
+
+.form-check-input {
     background-color: #fff;
 }
+.form-switch .form-check-input:not(:checked) {
+    --bs-form-switch-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23eb4f5a'/></svg>");
+}
 
-.form-switch .form-check-input,
-.custom-switch .custom-control-label::after {
+.form-check-input:checked {
+    color: #fff;
     background-color: $secondary;
     border-color: $secondary;
 }
 
-.form-check-input:checked,
-.custom-control-input:checked~.custom-control-label::before {
-    color: #fff;
-    border-color: $secondary;
-    background-color: $secondary;
-}
-
-.form-switch .form-check-input:checked,
-.custom-switch .custom-control-input:checked~.custom-control-label::after {
-    background-color: #fff;
-    border-color: #fff;
+.editmode-switch-form {
+    border-left: 1px solid $gray-300;
+    padding-left: 0.75rem;
 }
 
 // Colors for body and tiny mce.

@@ -182,10 +182,10 @@
         height: $activity-containericon-height;
 
         &.smaller {
-            width: $activity-containericon-width - 10px;
-            height: $activity-containericon-height - 10px;
-            max-width: $activity-containericon-width - 10px;
-            max-height: $activity-containericon-height - 10px;
+            width: $activity-containericon-width;
+            height: $activity-containericon-height;
+            max-width: $activity-containericon-width;
+            max-height: $activity-containericon-height;
         }
 
         @each $name, $color in $activity-icon-colors {
@@ -289,7 +289,8 @@
 
         &:before {
             position: absolute;
-            @extend .fa-regular;
+            font-family: "Font Awesome 6 Free";
+            font-weight: 400;
             content: fa-content($fa-var-eye-slash);
             display: inline-block;
             margin-right: 5px;
@@ -343,3 +344,74 @@
         width: 32px;
     }
 }
+
+.course-content .section-item .section-summary-activities .activity-count {
+    color: $text-muted;
+    font-size: $font-size-sm;
+    margin: 3px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.section-summary-activities {
+    .cmsummary-type + .cmsummary-type::before {
+        content: "·";
+        margin: 0 0.4rem;
+        color: $gray-500;
+    }
+}
+
+#page-course-view-topics,
+#page-course-view-section-topics {
+    .section.course-section {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+.section.hidden .course-section-header [data-region="sectionbadges"] {
+    top: 100%;
+    right: 1rem;
+}
+
+#page-course-view-topics,
+#page-course-view-section-topics {
+    .activityiconcontainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+
+        .activityicon {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+#page-course-view-section-topics {
+    .section.course-section .section-item,
+    .activity-item,
+    .activity {
+        border-bottom: 0;
+    }
+
+    .section-navigation.mdl-bottom {
+        margin-top: ($spacer * 2);
+    }
+}
+
+#page-course-view-section-topics {
+    #page-header .me-auto {
+        width: 100%;
+    }
+
+    .page-header-headings {
+        width: 100%;
+        border-bottom: 2px solid $black;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
