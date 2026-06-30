@@ -16,8 +16,6 @@
 
 namespace theme_citricityxund\task;
 
-defined('MOODLE_INTERNAL') || die();
-
 use theme_citricityxund\cli\populate_course_images;
 
 /**

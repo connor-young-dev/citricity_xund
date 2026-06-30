@@ -26,7 +26,6 @@ use core\hook\output\before_standard_head_html_generation;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_before_standard_html_head {
-    
     /**
      * Hook callback to add custom CSS to the page head.
      *
@@ -34,7 +33,7 @@ class core_before_standard_html_head {
      */
     public static function execute(before_standard_head_html_generation $hook): void {
         global $CFG;
-        
+
         $kirourl = $CFG->wwwroot . '/theme/citricityxund/fonts/kirofont.css';
         $html = '<link rel="stylesheet" href="' . s($kirourl) . '">';
         $hook->add_html($html);

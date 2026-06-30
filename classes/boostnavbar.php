@@ -28,7 +28,6 @@ use moodle_url;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class boostnavbar extends \theme_boost\boostnavbar {
-
     /**
      * Prepares the navigation nodes for use with boost.
      *
@@ -63,8 +62,13 @@ class boostnavbar extends \theme_boost\boostnavbar {
                 $displaycontext = \context_helper::get_navigation_filter_context($context);
                 $url = new moodle_url('/course/index.php', ['categoryid' => $category->id]);
                 $name = format_string($category->name, true, ['context' => $displaycontext]);
-                $categorynode = \breadcrumb_navigation_node::create($name, $url, \breadcrumb_navigation_node::TYPE_CATEGORY,
-                    null, $category->id);
+                $categorynode = \breadcrumb_navigation_node::create(
+                    $name,
+                    $url,
+                    \breadcrumb_navigation_node::TYPE_CATEGORY,
+                    null,
+                    $category->id
+                );
                 if (!$category->visible) {
                     $categorynode->hidden = true;
                 }
@@ -89,12 +93,14 @@ class boostnavbar extends \theme_boost\boostnavbar {
             case 'group-assign':
                 // Remove the 'Groups' navbar node in the Groupings, Grouping, group Overview and Assign pages.
                 $this->remove('groups');
+                // Fall through.
             case 'backup-backup':
             case 'backup-restorefile':
             case 'backup-copy':
             case 'course-reset':
                 // Remove the 'Import' navbar node in the Backup, Restore, Copy course and Reset pages.
                 $this->remove('import');
+                // Fall through.
             case 'course-user':
                 $this->remove('mygrades');
                 $this->remove('grades');
@@ -102,8 +108,8 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
         // Remove 'My courses' if we are in the module context.
         if ($this->page->context->contextlevel == CONTEXT_MODULE) {
-            // TODO investigate why categories only shown in certain course contexts by default.
-            // Add the categories breadcrumb navigation nodes.
+            // Categories are only shown in certain course contexts by default; add the
+            // category breadcrumb navigation nodes here for the module context.
             foreach ($this->get_categories() as $category) {
                 $context = \context_coursecat::instance($category->id);
                 if (!\core_course_category::can_view_category($category)) {
@@ -113,8 +119,13 @@ class boostnavbar extends \theme_boost\boostnavbar {
                 $displaycontext = \context_helper::get_navigation_filter_context($context);
                 $url = new moodle_url('/course/index.php', ['categoryid' => $category->id]);
                 $name = format_string($category->name, true, ['context' => $displaycontext]);
-                $categorynode = \breadcrumb_navigation_node::create($name, $url, \breadcrumb_navigation_node::TYPE_CATEGORY,
-                    null, $category->id);
+                $categorynode = \breadcrumb_navigation_node::create(
+                    $name,
+                    $url,
+                    \breadcrumb_navigation_node::TYPE_CATEGORY,
+                    null,
+                    $category->id
+                );
                 if (!$category->visible) {
                     $categorynode->hidden = true;
                 }
@@ -136,8 +147,6 @@ class boostnavbar extends \theme_boost\boostnavbar {
 
             $this->remove('mycourses');
             $this->remove('courses');
-            // Remove the course category breadcrumb node.
-            //$this->remove($this->page->course->category, \breadcrumb_navigation_node::TYPE_CATEGORY);
             $courseformat = course_get_format($this->page->course)->get_course();
             // Section items can be only removed if a course layout (coursedisplay) is not explicitly set in the
             // given course format or the set course layout is not 'One section per page'.
@@ -225,8 +234,10 @@ class boostnavbar extends \theme_boost\boostnavbar {
      */
     protected function remove_no_link_items(bool $removesections = true): void {
         foreach ($this->items as $key => $value) {
-            if (isset($lastitem) && is_a($lastitem, 'breadcrumb_navigation_node') && !$value->is_last() &&
-                (!$value->has_action() || ($value->type == \navigation_node::TYPE_SECTION && $removesections))) {
+            if (
+                isset($lastitem) && is_a($lastitem, 'breadcrumb_navigation_node') && !$value->is_last() &&
+                (!$value->has_action() || ($value->type == \navigation_node::TYPE_SECTION && $removesections))
+            ) {
                 unset($this->items[$key]);
             }
         }
