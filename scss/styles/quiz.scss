@@ -15,9 +15,16 @@
     }
     .info {
       position: absolute;
-      height: 100%;
+      left: 0;
+      top: 0;
+      bottom: 1rem;
+      width: 150px;
       background-color: #F0F3F8;
       border-color: #F0F3F8;
+    }
+
+    .content {
+      margin-left: 170px;
     }
 
     .qtext {

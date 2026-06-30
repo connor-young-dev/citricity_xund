@@ -1,4 +1,6 @@
 #nav-drawer {
+    z-index: $zindex-fixed + 6;
+
     .list-group-item:hover {
         background-color: $primary;
         color: $white;
