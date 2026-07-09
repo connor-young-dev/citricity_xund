@@ -147,7 +147,7 @@
 
     // Activities.
     .activity-wrapper {
-        padding: 12px 0;
+        padding: 1.25rem 0;
     }
     .activity-item:not(.activityinline) {
         padding: 0;
@@ -272,6 +272,10 @@
     margin-bottom: 0 !important;
 }
 
+.course-section-header .icons-collapse-expand {
+    border-radius: 50%;
+}
+
 // Change warning badge on course.
 .activity-item.hiddenactivity .description .course-description-item,
 .activity-item.hiddenactivity .activityiconcontainer,
@@ -384,8 +388,8 @@
         border-radius: 4px;
 
         .activityicon {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
         }
     }
 }
