@@ -20,3 +20,13 @@
         }
     }
 }
+
+#theme_boost-drawers-courseindex {
+    .draweractions {
+        order: -1;
+    }
+
+    .drawertoggle {
+        color: $primary;
+    }
+}
