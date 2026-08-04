@@ -69,6 +69,10 @@
     }
 }
 
+.pagelayout-course #page-header .page-context-header h1 {
+    font-size: 30pt;
+}
+
 // Course index.
 #courseindex-content {
     padding-left: 10px;
@@ -186,6 +190,14 @@
         a {
             color: $primary;
         }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus,
+        .dropdown-item:focus-within,
+        .dropdown-item:active,
+        .dropdown-item.active {
+            color: $white;
+        }
     }
 
     .activityiconcontainer {
@@ -200,15 +212,19 @@
         }
 
         @each $name, $color in $activity-icon-colors {
-            &:not(.isbranded):not(.modicon_hvp) {
-                &.#{$name} {
-                    background-color: $color;
-                }
-                img:not(.nofilter) {
-                    filter: brightness(0) invert(1);
-                }
+            &.#{$name} {
+                background-color: $color;
             }
         }
+
+        img:not(.nofilter) {
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    .activity-name-area {
+        min-height: $activity-containericon-height;
+        justify-content: center;
     }
 
     .activityname {
@@ -385,6 +401,17 @@
     }
 }
 
+.activity-altcontent {
+    .mediaplugin {
+        text-align: left;
+    }
+
+    .mediaplugin > div {
+        margin-left: 0;
+        margin-right: auto;
+    }
+}
+
 .section.hidden .course-section-header [data-region="sectionbadges"] {
     top: 100%;
     right: 1rem;
@@ -429,4 +456,3 @@
         margin-bottom: 1rem;
     }
 }
-
