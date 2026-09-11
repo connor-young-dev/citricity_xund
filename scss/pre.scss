@@ -177,8 +177,6 @@ $spacers: (
   ),
 ) !default;
 
-// Counter for Bootstrap's visually-hidden() (used by core's .accesshide),
-// which marks every property !important - so each counter must be too.
 @mixin visually-unhidden() {
   position: static !important;
   width: auto !important;
