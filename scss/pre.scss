@@ -1,7 +1,7 @@
 // Pre SCSS for the theme.
 
 // Bootstrap variables
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -11,32 +11,32 @@ $gray-600: #6a737b !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #1d2125 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
-$blue:    #0f6cbf !default;
-$indigo:  #6610f2 !default;
-$purple:  #613d7c !default;
-$pink:    #e83e8c !default;
-$red:     #ca3120 !default;
-$orange:  #f0ad4e !default;
-$yellow:  #ff7518 !default;
-$green:   #357a32 !default;
-$teal:    #20c997 !default;
-$cyan:    #008196 !default;
+$blue: #0f6cbf !default;
+$indigo: #6610f2 !default;
+$purple: #613d7c !default;
+$pink: #e83e8c !default;
+$red: #ca3120 !default;
+$orange: #f0ad4e !default;
+$yellow: #ff7518 !default;
+$green: #357a32 !default;
+$teal: #20c997 !default;
+$cyan: #008196 !default;
 
-$primary:       #3a7cb8 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $orange !default;
-$danger:        $red !default;
-$secondary:     #eb4f5a !default;
-$turkis:        #65C1BE !default;
+$primary: #3a7cb8 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $orange !default;
+$danger: $red !default;
+$secondary: #eb4f5a !default;
+$turkis: #65c1be !default;
 
-$info-outline:    #1f7e9a;
+$info-outline: #1f7e9a;
 $warning-outline: #a6670e;
 
 // Tables
-$table-accent-bg:             rgba($black, .03) !default;
+$table-accent-bg: rgba($black, 0.03) !default;
 
 // Options
 $enable-rounded: false !default;
@@ -55,27 +55,55 @@ $link-decoration: none !default;
 $course-content-maxwidth: 100% !default;
 
 // Fonts
-$font-family-sans-serif: "Kiro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$headings-font-family: "Kiro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-sans-serif:
+  "Kiro",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  "Noto Sans",
+  "Liberation Sans",
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
+$headings-font-family:
+  "Kiro",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  "Noto Sans",
+  "Liberation Sans",
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
 $font-size-base: 0.9375rem !default;
 $rfs-base-font-size: 0.9rem !default;
 $headings-font-weight: 700 !default;
 
 // Navbar
-$navbar-height:                     60px !default;
-$navbar-dark-hover-color:           rgba($white, 1) !default;
-$navbar-light-color:                $primary !default;
-$navbar-light-hover-color:          darken($primary, 15%) !default;
-$primary-nav-padding-y:             1rem !default;
-$navbar-nav-link-padding-x:         1.25rem !default;
-$nav-tabs-link-active-color:        $primary;
+$navbar-height: 60px !default;
+$navbar-dark-hover-color: rgba($white, 1) !default;
+$navbar-light-color: $primary !default;
+$navbar-light-hover-color: darken($primary, 15%) !default;
+$primary-nav-padding-y: 1rem !default;
+$navbar-nav-link-padding-x: 1.25rem !default;
+$nav-tabs-link-active-color: $primary;
 
 // Breadcrumbs
-$breadcrumb-padding-y:              .25rem !default;
-$breadcrumb-padding-x:              0 !default;
-$breadcrumb-item-padding:           .5rem !default;
-$breadcrumb-margin-bottom:          0 !default;
-$breadcrumb-bg:                     transparent !default;
+$breadcrumb-padding-y: 0.25rem !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-item-padding: 0.5rem !default;
+$breadcrumb-margin-bottom: 0 !default;
+$breadcrumb-bg: transparent !default;
 $breadcrumb-divider: "/" !default;
 $breadcrumb-divider-rtl: "/" !default;
 
@@ -83,22 +111,22 @@ $breadcrumb-divider-rtl: "/" !default;
 $gototop-bottom-position: 50px !default;
 
 // Alerts
-$alert-border-width:                0 !default;
+$alert-border-width: 0 !default;
 
-$card-group-margin: .25rem;
+$card-group-margin: 0.25rem;
 
 // Toasts
-$toast-color:                       $white !default;
-$toast-background-color:            rgba($gray-900, .95) !default;
-$toast-header-color:                $gray-100 !default;
-$toast-header-background-color:     rgba($white, .1) !default;
+$toast-color: $white !default;
+$toast-background-color: rgba($gray-900, 0.95) !default;
+$toast-header-color: $gray-100 !default;
+$toast-header-background-color: rgba($white, 0.1) !default;
 
 // Bootstrap 5 form check size; use em to match Bootstrap math in _variables.scss.
 $form-check-input-width: 1.25em;
 
 $input-bg: rgba($primary, 0.15) !default;
 
-$input-btn-focus-color: rgba($primary, .75) !default;
+$input-btn-focus-color: rgba($primary, 0.75) !default;
 
 $input-border-color: $input-bg !default;
 
@@ -114,41 +142,73 @@ $list-group-color: $primary !default;
 
 // stylelint-disable
 $theme-colors: () !default;
-$theme-colors: map-merge((
+$theme-colors: map-merge(
+  (
     primary: $primary,
     secondary: $secondary,
     success: $success,
     info: $info,
     warning: $warning,
     danger: $danger,
-    turkis: $turkis
-), $theme-colors);
+    turkis: $turkis,
+  ),
+  $theme-colors
+);
 // stylelint-enable
 
 $spacer: 1rem !default;
 $spacers: (
-    0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 2),
-    6: ($spacer * 3)
+  0: 0,
+  1: (
+    $spacer * 0.25,
+  ),
+  2: (
+    $spacer * 0.5,
+  ),
+  3: $spacer,
+  4: (
+    $spacer * 1.5,
+  ),
+  5: (
+    $spacer * 2,
+  ),
+  6: (
+    $spacer * 3,
+  ),
 ) !default;
+
+@mixin visually-unhidden() {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: normal !important;
+}
+
+$course-warning-bg: rgba($secondary, 0.5) !default;
+$course-card-border-radius: 5px !default;
+$course-badge-border-radius: 4px !default;
+$course-card-padding: 1.25rem !default;
+$course-blocks-column-width: 375px !default;
 
 $activity-containericon-height: 44px;
 $activity-containericon-width: 44px;
 
 $activity-icon-colors: () !default;
 $activity-icon-colors: map-merge(
-    (
-      "administration": #424242,
-      "assessment": #2C5B89,
-      "collaboration": #4E6575,
-      "communication": #8C1018,
-      "content": #2A6967,
-      "interactivecontent": #2A6967,
-      "interface": #424242
-    ),
-    $activity-icon-colors
+  (
+    "administration": #424242,
+    "assessment": #2c5b89,
+    "collaboration": #4e6575,
+    "communication": #8c1018,
+    "content": #2a6967,
+    "interactivecontent": #2a6967,
+    "interface": #424242,
+    "other": #2a6967,
+  ),
+  $activity-icon-colors
 );
