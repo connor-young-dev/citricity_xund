@@ -56,9 +56,9 @@
   .block_myoverview {
     border: 0;
     & > .card-body {
-      padding-top: 2rem !important; /* stylelint-disable-line declaration-no-important */
-      padding-left: 2rem !important; /* stylelint-disable-line declaration-no-important */
-      padding-right: 2rem !important; /* stylelint-disable-line declaration-no-important */
+      padding-top: 2rem !important;
+      padding-left: 2rem !important;
+      padding-right: 2rem !important;
     }
   }
 
