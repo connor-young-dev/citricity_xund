@@ -1,176 +1,199 @@
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 // Rounded user pictures
 .userpicture {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 // Reset the default styling back to the bootstrap defaults for
 // the secondary outline button because gray-200 is much too light
 // for an outline button.
 .btn-outline-secondary {
-    @include button-outline-variant($primary);
-    border-color: $primary;
+  @include button-outline-variant($primary);
+  border-color: $primary;
 }
 
 .btn-outline-info {
-    @include button-outline-variant($info-outline);
+  @include button-outline-variant($info-outline);
 }
 
 .btn-outline-warning {
-    @include button-outline-variant($warning-outline);
+  @include button-outline-variant($warning-outline);
 }
 
 .bg-gray {
-    background-color: $gray-200 !important;
+  background-color: $gray-200 !important;
 }
 
 // Stop radius defaulting to zero.
 .btn {
-    border-radius: $btn-border-radius;
+  border-radius: $btn-border-radius;
 }
 
 .form-control {
-    border-radius: $input-border-radius;
+  border-radius: $input-border-radius;
 }
 
 // Page spacing.
 @include media-breakpoint-up(md) {
-    #page.drawers {
-        padding-left: 0;
-        padding-right: 0;
+  #page.drawers {
+    padding-left: 0;
+    padding-right: 0;
 
-        #topofscroll {
-            padding-left: 3rem;
-            padding-right: 3rem;
-        }
+    #topofscroll {
+      padding-left: 3rem;
+      padding-right: 3rem;
     }
+  }
 }
 
 @include media-breakpoint-down(md) {
-    #page.drawers #topofscroll {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        max-width: 100%;
-    }
+  #page.drawers #topofscroll {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+  }
 }
 
 // Link and categories use suitable colour variables.
 .block .block-cards .btn-link {
-    color: $link-color;
+  color: $link-color;
 }
 .block .block-cards span.categoryname {
-    color: unset;
+  color: unset;
 }
 
 // Drawer toggles.
 .drawer-toggles .drawer-toggler .btn {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 16px;
+  border-radius: 200px;
+  background-color: $secondary;
+  color: #fff;
+  box-shadow: $box-shadow-sm;
+  transition: padding 200ms;
+
+  .icon {
     width: auto;
     height: auto;
-    margin: 0;
-    padding: 16px;
-    border-radius: 200px;
+  }
+
+  &:hover,
+  &:focus {
     background-color: $secondary;
     color: #fff;
-    box-shadow: $box-shadow-sm;
-    transition: padding 200ms;
-
-    .icon {
-        width: auto;
-        height: auto;
-    }
-
-    &:hover,
-    &:focus {
-        background-color: $secondary;
-        color: #fff;
-    }
+  }
 }
 
 // Left toggle (course index): flat against the left edge, grows leftward on hover.
 .drawer-toggles .drawer-left-toggle .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    padding-right: 14px;
-    padding-left: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-right: 14px;
+  padding-left: 10px;
 
-    &:hover {
-        padding-left: 20px;
-    }
+  &:hover {
+    padding-left: 20px;
+  }
 }
 
 // Right toggle (block drawer): flat against the right edge, grows rightward on hover.
 .drawer-toggles .drawer-right-toggle .btn {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    padding-right: 10px;
-    padding-left: 14px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-right: 10px;
+  padding-left: 14px;
 
-    &:hover {
-        padding-right: 20px;
-    }
+  &:hover {
+    padding-right: 20px;
+  }
 }
 
 .form-switch .form-check-input {
-    width: 1.75rem;
-    height: 1rem;
-    margin-top: 0.25rem;
-    border-radius: 2rem;
+  width: 1.75rem;
+  height: 1rem;
+  margin-top: 0.25rem;
+  border-radius: 2rem;
 }
 
 .form-check-input {
-    background-color: #fff;
+  background-color: #fff;
 }
 .form-switch .form-check-input:not(:checked) {
-    --bs-form-switch-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23eb4f5a'/></svg>");
+  --bs-form-switch-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23eb4f5a'/></svg>");
 }
 
 .form-check-input:checked {
-    color: #fff;
-    background-color: $secondary;
-    border-color: $secondary;
+  color: #fff;
+  background-color: $secondary;
+  border-color: $secondary;
 }
 
 .editmode-switch-form {
-    border-left: 1px solid $gray-300;
-    padding-left: 0.75rem;
+  border-left: 1px solid $gray-300;
+  padding-left: 0.75rem;
 }
 
 // Colors for body and tiny mce.
 #page-content,
 .mce-content-body {
-    p, li {
-        color: $body-copy-color;
-        a {
-            // Note: Link colour just for body copy and tiny mce.
-            color: $body-link-color;
-        }
+  p,
+  li {
+    color: $body-copy-color;
+    a {
+      // Note: Link colour just for body copy and tiny mce.
+      color: $body-link-color;
     }
+  }
 }
 
 // Book activity font size.
 #page-mod-book-view .book_content {
-    font-size: 1.25em;
+  font-size: 1.25em;
 }
+
+// Book chapter navigation
+body.path-mod-book #mod_book-chaptersnavigation {
+  .btn-previous,
+  .btn-next {
+    background-color: $secondary;
+    border-color: $secondary;
+
+    .icon {
+      color: #fff;
+    }
+  }
+
+  .btn-previous:hover,
+  .btn-previous:focus,
+  .btn-next:hover,
+  .btn-next:focus {
+    background-color: darken($secondary, 8%);
+    border-color: darken($secondary, 8%);
+  }
+}
+
 #tinymce.id_page-mod-book-edit {
-    // Note - this makes the editor use the same font size
-    // as 1.25em.
-    // Since tiny mce editor is a root element of a separate dom document,
-    // em's will be wrong since the same parent elements are missing.
-    font-size: 18.75px;
+  // Note - this makes the editor use the same font size
+  // as 1.25em.
+  // Since tiny mce editor is a root element of a separate dom document,
+  // em's will be wrong since the same parent elements are missing.
+  font-size: 18.75px;
 }
 
 // Tiny mce.
 .mce-content-body {
-    padding: 0.5rem;
-    // Do not change the root font size if the viewport size changes.
-    // We are in an editor!
-    @media (max-width: 1200px) {
-        body {
-            font-size: .9375rem ;
-        }
+  padding: 0.5rem;
+  // Do not change the root font size if the viewport size changes.
+  // We are in an editor!
+  @media (max-width: 1200px) {
+    body {
+      font-size: 0.9375rem;
     }
+  }
 }

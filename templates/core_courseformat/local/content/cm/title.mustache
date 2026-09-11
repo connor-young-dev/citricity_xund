@@ -1,0 +1,51 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_citricityxund/core_courseformat/local/content/cm/title
+
+    Theme override of core_courseformat/local/content/cm/title.
+
+    Wraps the module-type suffix (altname) in .activity-type-label and moves
+    it in front of the activity name, so the theme can surface it as the
+    visible type label above the name. The localised type only reaches this
+    template pre-wrapped in core's accesshide span (the str helper cannot
+    resolve a component computed from modname), so the label is unhidden in
+    CSS rather than re-resolved here.
+
+    Example context (json):
+    {
+        "url": "#",
+        "instancename": "Activity name",
+        "uservisible": true,
+        "onclick": "alert('ok')",
+        "altname": "PDF file",
+        "linkclasses": "",
+        "modname": "resource"
+    }
+}}
+{{#uservisible}}
+    <a href="{{url}}" class="{{linkclasses}} aalink stretched-link" onclick="{{{onclick}}}">
+        {{#altname}}<span class="activity-type-label">{{{altname}}}</span>{{/altname}}
+        <span class="instancename">{{{instancename}}}</span>
+    </a>
+{{/uservisible}}
+{{^uservisible}}
+    {{#altname}}<span class="activity-type-label">{{{altname}}}</span>{{/altname}}
+    <span class="instancename">
+        {{{instancename}}}
+    </span>
+{{/uservisible}}

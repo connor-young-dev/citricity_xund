@@ -1,306 +1,490 @@
+// Course banner and page layout
 #course-banner {
-    background-color: rgba($primary, .25);
-    background-size: 40px;
-    height: 60px;
-    @include media-breakpoint-up(md) {
-        height: 160px;
-        background-size: 120px;
-    }
+  background-color: rgba($primary, 0.25);
+  background-size: 40px;
+  height: 60px;
+  @include media-breakpoint-up(md) {
+    height: 160px;
+    background-size: 120px;
+  }
 }
 
 // Full width header layout on course pages.
 .pagelayout-course,
 .pagelayout-incourse {
-    #page.drawers #topofscroll,
-    #page-header {
-        padding-left: 0;
-        padding-right: 0;
-    }
+  #page.drawers #topofscroll,
+  #page-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
+  .page-context-header,
+  #page-navbar,
+  #page-content,
+  .secondary-navigation {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @include media-breakpoint-down(sm) {
     .page-context-header,
     #page-navbar,
     #page-content,
     .secondary-navigation {
-        padding-left: 3rem;
-        padding-right: 3rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
-
-    @include media-breakpoint-down(sm) {
-        .page-context-header,
-        #page-navbar,
-        #page-content,
-        .secondary-navigation {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-    }
+  }
 }
 
 .pagelayout-course {
-    // Remove card and region borders.
-    .card,
-    #region-main {
-        border: 0;
-        padding-top: 0;
+  // Remove card and region borders.
+  .card,
+  #region-main {
+    border: 0;
+    padding-top: 0;
+  }
+
+  // Move block region alongside heading for large devices.
+  @include media-breakpoint-up(xl) {
+    #page-header > .col-12.pt-3 {
+      max-width: calc(100% - #{$course-blocks-column-width});
+      padding-bottom: 0 !important;
     }
 
-    // Move block region alongside heading for large devices.
-    @include media-breakpoint-up(xl) {
-        #page-header>.col-12.pt-3 {
-            max-width: calc(100% - 375px);
-            padding-bottom: 0 !important;
-        }
+    [data-region="blocks-column"] {
+      position: relative;
+      top: -153px;
+      height: calc(100% + 169px);
+      margin-right: -15px;
+      background-color: $drawer-bg;
+      width: $course-blocks-column-width;
+      padding-top: 15px;
 
-        [data-region="blocks-column"] {
-            position: relative;
-            top: -153px;
-            height: calc(100% + 169px);
-            margin-right: -15px;
-            background-color: $drawer-bg;
-            width: 375px;
-            padding-top: 15px;
-
-            .block {
-                margin-left: 15px;
-                margin-right: 15px;
-                margin-bottom: 15px;
-            }
-        }
+      .block {
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+      }
     }
+  }
 }
 
 .pagelayout-course #page-header .page-context-header h1 {
-    font-size: 30pt;
+  font-size: 30pt;
 }
 
-// Course index.
+// Course index drawer
 #courseindex-content {
-    padding-left: 10px;
-    padding-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
 .courseindex .courseindex-section {
-    text-decoration: none;
+  text-decoration: none;
 }
+
 .courseindex-section:focus {
-    margin-bottom: 3px;
-    margin-top: 3px;
-    box-shadow: none !important;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  box-shadow: none !important;
 }
+
 .courseindex .courseindex-item,
 .courseindex .courseindex-item.dimmed {
-    background-color: #fff;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid #f6f8f9;
-    position: relative;
+  background-color: #fff;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid $list-group-border-color;
+  position: relative;
+
+  .courseindex-link,
+  .courseindex-chevron {
+    color: $primary;
+  }
+
+  &.pageitem .courseindex-link {
+    color: #fff;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken(#fff, 5%);
 
     .courseindex-link,
     .courseindex-chevron {
-        color: $primary;
+      color: $primary;
     }
+  }
 
-    &.pageitem .courseindex-link {
-        color: #fff;
+  &.restrictions .courseindex-locked {
+    display: block;
+    position: absolute;
+    right: 0.75rem;
+
+    > .icon {
+      background-color: $course-warning-bg;
+      vertical-align: middle;
+      line-height: 20px;
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 10px;
     }
-
-    &:hover,
-    &:focus {
-        background-color: darken(#fff, 5%);
-
-        .courseindex-link,
-        .courseindex-chevron {
-            color: $primary;
-        }
-    }
-
-    &.restrictions .courseindex-locked {
-        display: block;
-        position: absolute;
-        right: 0.75rem;
-
-        >.icon {
-            background-color: rgba(235,79,90,.5);
-            vertical-align: middle;
-            line-height: 20px;
-            width: 20px;
-            height: 20px;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 10px;
-        }
-    }
+  }
 }
 
 .courseindex .courseindex-item.dimmed {
-    &.pageitem .courseindex-link  {
-        color: $primary;
-    }
+  &.pageitem .courseindex-link {
+    color: $primary;
+  }
 }
 
-#page-course-view-topics, #page-course-view-section-topics {
-    .section {
-        .label {
-            .contentwithoutlink {
-                padding-right: 0;
-            }
-        }
-    }
+// Course pages
+#page-course-view-topics,
+#page-course-view-section-topics {
+  #region-main > div {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    .course-content #section-0 .course-section-header {
-        border-bottom: none;
-    }
+  .section.course-section:not(.section-summary) > .section-item {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    // Activities.
-    .activity-wrapper {
-        padding: 1.25rem 0;
-    }
-
-    .activity-item {
-        .activity-grid {
-            margin-bottom: 0.5rem;
-        }
-
-        .activity-altcontent {
-            margin-bottom: .25rem;
-        }
-    }
-
-    .activity-item:not(.activityinline) {
-        padding: 0;
-        border-radius: 5px;
-        position: relative;
-
-        .description {
-            position: relative;
-            padding: 0 1rem;
-
-            .course-description-item.isrestricted {
-                padding: 0.25rem 0.75rem;
-                border-radius: 4px;
-                background-color: rgba(235, 79, 90, .5);
-                color: #fff;
-
-                .icon {
-                    vertical-align: middle;
-                }
-            }
-        }
-    }
+  .section.course-section {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    position: relative;
+    scroll-margin-top: 70px;
 
     .section-item {
-        a {
-            color: $primary;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item:focus,
-        .dropdown-item:focus-within,
-        .dropdown-item:active,
-        .dropdown-item.active {
-            color: $white;
-        }
+      border: 0;
+      border-bottom: 1px solid $gray-300;
     }
 
-    .activityiconcontainer {
-        width: $activity-containericon-width;
-        height: $activity-containericon-height;
-
-        &.smaller {
-            width: $activity-containericon-width;
-            height: $activity-containericon-height;
-            max-width: $activity-containericon-width;
-            max-height: $activity-containericon-height;
-        }
-
-        @each $name, $color in $activity-icon-colors {
-            &.#{$name} {
-                background-color: $color;
-            }
-        }
-
-        img:not(.nofilter) {
-            filter: brightness(0) invert(1);
-        }
+    .course-content-item-content {
+      margin-top: 1rem !important;
     }
 
-    .activity-name-area {
-        min-height: $activity-containericon-height;
-        justify-content: center;
+    .sectionname {
+      margin-bottom: 0;
     }
 
-    .activityname {
-        font-size: $font-size-lg;
-    }
+    .content > .description {
+      display: inline-block;
+      position: absolute;
+      top: 1rem;
+      right: 1.75rem;
+      margin: 0 !important;
 
-    .activity-information {
-        margin-top: 13px;
-        margin-right: 0.75rem;
-    }
+      .section_availability.course-description-item {
+        padding: 0.25rem 0.75rem;
+        background-color: $course-warning-bg;
+        border-radius: $course-badge-border-radius;
+        margin-top: 0.5rem;
 
-    .course-content {
-        .section-summary {
-            border-radius: 5px;
+        .icon {
+          vertical-align: middle;
         }
+      }
+    }
+  }
 
-        .single-section,
-        #section-0 {
-            .course-section-header {
-                border-bottom: 2px solid;
-                padding-bottom: 0.5rem;
-                margin-bottom: 1rem;
-                border-bottom: none;
-            }
+  .section-item {
+    a {
+      color: $primary;
+    }
+    .dropdown-item:hover,
+    .dropdown-item:focus,
+    .dropdown-item:focus-within,
+    .dropdown-item:active,
+    .dropdown-item.active {
+      color: $white;
+    }
+  }
 
-        }
+  .course-content {
+    .single-section,
+    #section-0 {
+      .course-section-header {
+        border-bottom: 0;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
     }
 
-    .section.course-section {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+    li#section-0 > .section-item {
+      border-bottom: 0;
+    }
+
+    .section_goto {
+      display: none;
+    }
+
+    .section-summary-activities + .section {
+      border-top: 0;
+    }
+
+    li.section.section-summary {
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+
+      > .section-item {
         position: relative;
-        scroll-margin-top: 70px;
+        border: 1px solid $gray-300;
+        border-radius: $course-card-border-radius;
+        background-color: #fff;
+        padding: 1rem $course-card-padding;
+      }
 
-        .section-item {
-            border: none;
-            border-bottom: 1px solid $gray-300;
+      .course-section-header .icon.fa-lock {
+        display: none;
+      }
+
+      .availabilityinfo.isrestricted {
+        max-width: 420px;
+      }
+
+      > .section-item:has(.availabilityinfo.isrestricted) .sectionname {
+        padding-right: 42%;
+      }
+
+      .section-summary-activities {
+        justify-content: flex-end;
+        margin-top: 0.75rem;
+
+        .ms-auto {
+          margin-left: 1rem !important;
         }
-
-        .course-content-item-content {
-            margin-top: 1rem !important;
-        }
-
-        .sectionname {
-            margin-bottom: 0;
-        }
-
-        .content>.description {
-            display: inline-block;
-            position: absolute;
-            top: 1rem;
-            right: 1.75rem;
-            margin: 0 !important;
-
-            .section_availability.course-description-item {
-                padding: .25rem .75rem;
-                background-color: rgba(235, 79, 90, .5);
-                border-radius: 4px;
-                margin-top: 0.5rem;
-
-                .icon {
-                    vertical-align: middle;
-                }
-            }
-
-        }
+      }
     }
+  }
+
+  .activity-wrapper {
+    padding: 0.5rem 0;
+  }
+
+  .activity-item {
+    .activity-grid {
+      margin-bottom: 0;
+    }
+
+    .activity-altcontent {
+      margin-bottom: 0;
+    }
+  }
+
+  .activity-item:not(.activityinline) {
+    padding: $course-card-padding;
+    border: 1px solid $gray-300;
+    border-radius: $course-card-border-radius;
+    background-color: #fff;
+    position: relative;
+
+    .description {
+      position: relative;
+      padding: 0 1rem;
+
+      .course-description-item.isrestricted {
+        padding: 0.25rem 0.75rem;
+        border-radius: $course-badge-border-radius;
+        background-color: $course-warning-bg;
+        color: #fff;
+
+        .icon {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .activity-item:not(.activityinline) .activity-altcontent {
+      grid-row: 4;
+      grid-column: #{"1 / -1"};
+    }
+  }
+
+  .activity-item:not(.activityinline)
+    .activity-altcontent.activity-description {
+    margin-top: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-top: 0;
+    border-radius: $course-badge-border-radius;
+    background-color: $gray-100;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  li.activity .activity-item {
+    margin-left: 0;
+  }
+
+  .activityiconcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $course-badge-border-radius;
+    width: $activity-containericon-width;
+    height: $activity-containericon-height;
+
+    &.smaller {
+      width: $activity-containericon-width;
+      height: $activity-containericon-height;
+      max-width: $activity-containericon-width;
+      max-height: $activity-containericon-height;
+    }
+
+    .activityicon {
+      width: 34px;
+      height: 34px;
+    }
+
+    @each $name, $color in $activity-icon-colors {
+      &.#{$name} {
+        background-color: $color;
+      }
+    }
+
+    img:not(.nofilter) {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .activity-item:not(.activityinline) .activity-icon.activityiconcontainer {
+    grid-row: 1 / 4;
+    align-self: center !important;
+  }
+
+  .activity-name-area {
+    min-height: $activity-containericon-height;
+    justify-content: center;
+  }
+
+  .activityname {
+    font-size: $font-size-lg;
+  }
+
+  .activity-type-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $gray-600;
+
+    .accesshide {
+      @include visually-unhidden;
+    }
+  }
+
+  .activity-information {
+    margin-top: 13px;
+    margin-right: 0.75rem;
+  }
+
+  .availabilityinfo.isrestricted {
+    width: fit-content;
+    background-color: $course-warning-bg;
+    color: #fff;
+    border-radius: $course-badge-border-radius;
+    padding: 0.25rem 0.75rem;
+    font-size: $font-size-sm;
+
+    .icon {
+      color: #fff;
+    }
+  }
+
+  .activity-item:not(.activityinline):has(.activity-availability.isrestricted) {
+    .activity-grid {
+      padding-right: 34%;
+    }
+
+    .activity-availability.isrestricted {
+      position: absolute;
+      top: 50%;
+      right: $course-card-padding;
+      transform: translateY(-50%);
+      margin: 0;
+      max-width: 32%;
+    }
+  }
+
+  .activity-item:not(.activityinline):has(.activity-completion):has(
+      .activity-availability.isrestricted
+    ) {
+    .activity-grid {
+      padding-right: 0;
+    }
+
+    .activity-availability.isrestricted {
+      position: static;
+      transform: none;
+      justify-self: end;
+      margin-top: 0.5rem;
+      max-width: none;
+    }
+  }
+
+  .section {
+    .label {
+      .contentwithoutlink {
+        padding-right: 0;
+      }
+    }
+  }
+
+  li.modtype_label .activity-item {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0.25rem 0;
+  }
 }
 
-[id*="coursecontentcollapse"]>[data-for="sectioninfo"] {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+#page-course-view-topics:not(.editing) .activity-item.activityinline {
+  padding: 0.25rem 0;
+}
+
+// Single-section pages only
+#page-course-view-section-topics {
+  .section.course-section .section-item,
+  .activity-item,
+  .activity {
+    border-bottom: 0;
+  }
+
+  .section-navigation.mdl-bottom {
+    margin-top: ($spacer * 2);
+  }
+
+  #page-header .me-auto {
+    width: 100%;
+  }
+
+  .page-header-headings {
+    width: 100%;
+    border-bottom: 2px solid $black;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+// Shared course components (all pages)
+[id*="coursecontentcollapse"] > [data-for="sectioninfo"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .course-section-header .icons-collapse-expand {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 // Change warning badge on course.
@@ -308,151 +492,96 @@
 .activity-item.hiddenactivity .activityiconcontainer,
 .activity-item.hiddenactivity .badge,
 .course-section-header .badge {
-    &.badge-warning,
-    &.bg-warning {
-        background-color: rgba(235,79,90,.5);
-        color: #fff;
-        border-radius: 4px;
-        padding: .5rem .75rem;
-        margin-left: calc(#{$activity-containericon-width} + 1rem);
-        position: relative;
-        padding-left: 2.5rem;
+  &.badge-warning,
+  &.bg-warning {
+    background-color: $course-warning-bg;
+    color: #fff;
+    border-radius: $course-badge-border-radius;
+    padding: 0.5rem 0.75rem;
+    margin-left: calc(#{$activity-containericon-width} + 1rem);
+    position: relative;
+    padding-left: 2.5rem;
 
-        &:before {
-            position: absolute;
-            font-family: "Font Awesome 6 Free";
-            font-weight: 400;
-            content: fa-content($fa-var-eye-slash);
-            display: inline-block;
-            margin-right: 5px;
-            font-size: 16px;
-            width: 16px;
-            height: 16px;/* Adjust this value to add spacing between the icon and content */
-            left: 0.75rem;
-            top: 0.3rem;
-        }
+    &:before {
+      position: absolute;
+      font-family: "Font Awesome 6 Free";
+      font-weight: 400;
+      content: fa-content($fa-var-eye-slash);
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      left: 0.75rem;
+      top: 0.3rem;
     }
+  }
 }
 
 // Move warning badge to the right in course header.
 .course-section-header {
-    position: relative;
-    .sectionbadges {
-        position: absolute;
-        right: 1rem;
+  position: relative;
+  .sectionbadges {
+    position: absolute;
+    right: 1rem;
 
-        .badge.badge-warning,
-        .badge.bg-warning {
-            margin-left: 0;
-        }
+    .badge.badge-warning,
+    .badge.bg-warning {
+      margin-left: 0;
     }
-}
-
-.modtype_label {
-    .description {
-        p[dir="ltr"]:empty {
-            display: none;
-        }
-    }
-
-    .activity-basis {
-        position: absolute;
-        right: 0;
-        z-index: 1;
-    }
-}
-
-// Reduce padding between elements in topics format when not editing.
-#page-course-view-topics:not(.editing) .activity-item.activityinline {
-    padding: 0.25rem 0;
-}
-
-// Fix folder activity icon size
-.filemanager {
-    img.icon {
-        min-width: 32px;
-        min-height: 32px;
-        width: 32px;
-    }
-}
-
-.course-content .section-item .section-summary-activities .activity-count {
-    color: $text-muted;
-    font-size: $font-size-sm;
-    margin: 3px;
-    white-space: nowrap;
-    display: inline-block;
-}
-
-.section-summary-activities {
-    .cmsummary-type + .cmsummary-type::before {
-        content: "·";
-        margin: 0 0.4rem;
-        color: $gray-500;
-    }
-}
-
-#page-course-view-topics,
-#page-course-view-section-topics {
-    .section.course-section {
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-top: 0;
-    }
-}
-
-.activity-altcontent {
-    .mediaplugin {
-        text-align: left;
-    }
-
-    .mediaplugin > div {
-        margin-left: 0;
-        margin-right: auto;
-    }
+  }
 }
 
 .section.hidden .course-section-header [data-region="sectionbadges"] {
-    top: 100%;
-    right: 1rem;
+  top: 100%;
+  right: 1rem;
 }
 
-#page-course-view-topics,
-#page-course-view-section-topics {
-    .activityiconcontainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-
-        .activityicon {
-            width: 34px;
-            height: 34px;
-        }
+.modtype_label {
+  .description {
+    p[dir="ltr"]:empty {
+      display: none;
     }
+  }
+
+  .activity-basis {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
 }
 
-#page-course-view-section-topics {
-    .section.course-section .section-item,
-    .activity-item,
-    .activity {
-        border-bottom: 0;
-    }
-
-    .section-navigation.mdl-bottom {
-        margin-top: ($spacer * 2);
-    }
+.filemanager {
+  img.icon {
+    min-width: 32px;
+    min-height: 32px;
+    width: 32px;
+  }
 }
 
-#page-course-view-section-topics {
-    #page-header .me-auto {
-        width: 100%;
-    }
+.course-content .section-item .section-summary-activities .activity-count {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  margin: 3px;
+  white-space: nowrap;
+  display: inline-block;
+}
 
-    .page-header-headings {
-        width: 100%;
-        border-bottom: 2px solid $black;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-    }
+.section-summary-activities {
+  .cmsummary-type + .cmsummary-type::before {
+    content: "·";
+    margin: 0 0.4rem;
+    color: $gray-500;
+  }
+}
+
+.activity-altcontent {
+  .mediaplugin {
+    text-align: left;
+  }
+
+  .mediaplugin > div {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
